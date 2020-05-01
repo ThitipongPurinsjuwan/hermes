@@ -104,12 +104,12 @@ $app->get('/updateReservation', function (Request $request, Response $response, 
     resinfo_comments = '$comment'
      WHERE resinfo_id = $id";
     $this->db->query($sql);
-    $header = "location: http://localhost/hermes/projectHermes/page/hermes_edit_reservation.html?id=".$id;
+    $header = "location: http://localhost/hermes/projectHermes/page/hermes_edit_reservation.html?id=" . $id;
     header($header);
     exit(0);
 });
 
-$app->get('/updateGuest', function (Request $request, Response $response, array $args) {
+$app->post('/updateGuest', function (Request $request, Response $response, array $args) {
     $params = $request->getQueryParams();
     $fname = $params['display_guest_firstname'];
     $lname = $params['display_guest_lastname'];
@@ -122,9 +122,6 @@ $app->get('/updateGuest', function (Request $request, Response $response, array 
     ginfo_telno = '$telno'
     where ginfo_id = 1";
     $this->db->query($sql);
-    $header = "location: http://localhost/hermes/projectHermes/page/hermes_edit_reservation.html?id=";
-    header($header);
-    exit(0);
 });
 
 $app->run();
