@@ -9,7 +9,7 @@ $(() => {
   var vars = query.split("=");
   var ID = vars[1];
   var url =
-    "http://localhost/hermes/projectHermes/api.php/ShowReservation/" + ID;
+    "http://localhost/hermes/api.php/ShowReservation/" + ID;
   // input test
 
 

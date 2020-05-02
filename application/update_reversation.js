@@ -8,7 +8,7 @@ $(() => {
   $("#form_edit_contact").on("submit",function(e){
     var parameter = $(this).serializeArray();
     console.log(parameter);
-    var url = "http://localhost/hermes/projectHermes/api.php/updateReservation";
+    var url = "http://localhost/hermes/api.php/updateReservation";
     if (confirm('Are you sure you want to save this CONTACT into the database?')) {
       $.post(url,parameter,function(response){
         alert(response);
@@ -27,7 +27,7 @@ $(() => {
   $("#form_edit_guest").on("submit",function(e){
     var parameter = $(this).serializeArray();
     console.log(parameter);
-    var url = "http://localhost/hermes/projectHermes/api.php/updateGuest";
+    var url = "http://localhost/hermes/api.php/updateGuest";
     if (confirm('Are you sure you want to save this GUEST into the database?')) {
       $.post(url,parameter,function(response){
         alert(response);
