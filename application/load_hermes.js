@@ -12,7 +12,7 @@ $(() => {
     "http://localhost/hermes/projectHermes/api.php/ShowReservation/" + ID;
   // input test
 
-  
+
   getjson(url);
 });
 
@@ -22,7 +22,8 @@ function getjson(url) {
     .done(function (data) {
 
       // Display contact/agent
-      $("#display_check_inout").val(data[0]["ginfo_in"]);
+      $("#night_head").text(data[0]["ginfo_night"]);
+      $("#display_check_inout").val(data[0]["ginfo_in"]+" - "+data[0]["ginfo_out"]);
       $("#display_id").val(data[0]["resinfo_id"]);
       $("#display_firstname").val(data[0]["resinfo_first_name"]);
       $("#display_lastname").val(data[0]["resinfo_last_name"]);
@@ -42,6 +43,8 @@ function getjson(url) {
       $("#display_roomviews").text(data[0]["rview_eng"]);
 
       // Display detail reser
+      display_guest_id
+      $("#display_guest_id").val(data[0]["ginfo_id"]);
       $("#display_guest_firstname").val(data[0]["ginfo_first_name"]);
       $("#display_guest_lastname").val(data[0]["ginfo_last_name"]);
       $("#display_guest_email").val(data[0]["ginfo_email"]);

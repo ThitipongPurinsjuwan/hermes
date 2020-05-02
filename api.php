@@ -3,6 +3,8 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
+use function FastRoute\TestFixtures\all_options_cached;
+
 require './api/vendor/autoload.php';
 
 $config = [
@@ -86,42 +88,59 @@ $app->get('/ShowReservation/{bl_id}', function (Request $request, Response $resp
 
 
 
-$app->post('/updateReservation', function (Request $request, Response $response, array $args) {
+$app->post('/updateReservation', function (Request $request, Response $response, array $args){
     $params = $_POST;
-    // print_r($params);
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
     // exit();
     $fname = $params['display_firstname'];
     $lname = $params['display_lastname'];
     $telno = $params['display_telephone'];
     $email = $params['display_email'];
     $comment = $params['display_note'];
-    $id = $params['id'];
+    $id = $params['display_id'];
 
-    $sql = "UPDATE reservation_info SET resinfo_first_name = '$fname',
+    $sql = "UPDATE reservation_info SET
+    resinfo_first_name = '$fname',
     resinfo_last_name = '$lname',
     resinfo_email = '$email',
     resinfo_telno = '$telno',
     resinfo_comments = '$comment'
-     WHERE resinfo_id = $id";
-    $this->db->query($sql);
-    $header = "location: http://localhost/hermes/projectHermes/page/hermes_edit_reservation.html?id=" . $id;
-    header($header);
-    exit(0);
+    WHERE resinfo_id = $id";
+    try {
+        $this->db->query($sql);
+        return '{"message":"success"}';
+    } catch (PDOException $e) {
+        return '{"message":"false"}';
+    }
 });
 
 $app->post('/updateGuest', function (Request $request, Response $response, array $args) {
-    $params = $request->getQueryParams();
+    $params = $_POST;
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
+    // exit();
     $fname = $params['display_guest_firstname'];
     $lname = $params['display_guest_lastname'];
     $telno = $params['display_guest_telephone'];
     $email = $params['display_guest_email'];
-    $sql = "update guest_info 
+    $id = $params['display_guest_id'];
+
+    $sql = "UPDATE guest_info 
     set ginfo_first_name = '$fname', 
     ginfo_last_name = '$lname', 
     ginfo_email = '$email', 
     ginfo_telno = '$telno'
-    where ginfo_id = 1";
-    $this->db->query($sql);
+    WHERE ginfo_id = $id";
+
+    try {
+        $this->db->query($sql);
+        return '{"message":"success"}';
+    } catch (PDOException $e) {
+        return '{"message":"false"}';
+    }
 });
 
 $app->run();
