@@ -1,46 +1,25 @@
 $(() => {
-  //   $("#save_update").click(update);
+  $("#g3").hide();
+  $("#btn_add").click(()=>{
+    $("#g3").show(300);
+  })
 
-  // split id of url(?id=)
+  // input test
   var query = window.location.search.substring(1);
-  // alert("query :"+query);
   var vars = query.split("=");
   var ID = vars[1];
   var url =
     "http://localhost/hermes/projectHermes/api.php/ShowReservation/" + ID;
-  // jquery  session  display END
-  // alert("URL LOAD HERMES  : " + url);
+  // input test
+
+  
   getjson(url);
-  // jquery  session  display END
 });
 
-// function update(){
-//     var url = "http://localhost/hermes/projectHermes/api.php/updateReservation";
-//     url += "?id="+$("#display_id").val();
-//     url += "&display_firstname="+$("#display_firstname").val();
-//     url += "&display_lastname="+$("#display_lastname").val();
-//     url += "&display_email="+$("#display_email").val();
-//     url += "&display_telephone="+$("#display_telephone").val();
-//     url += "&display_note="+$("#display_note").val();
-//     alert("URL Update  :" + url);
-//     alert("Before Pass");
-//     location.replace(url);
-//     alert("After Pass");
-// }
 
 function getjson(url) {
   $.getJSON(url, { format: "json" })
     .done(function (data) {
-      // var personObject = data;
-      // // Convert the person object into JSON string and save it into storage
-      // localStorage.setItem("personObject", JSON.stringify(personObject));
-      // // Retrieve the JSON string
-      // var jsonString = localStorage.getItem("personObject");
-      // // Parse the JSON string back to JS object
-      // var localJSON = JSON.parse(jsonString);
-      // // Accessing individual values
-      // console.log("localJSON");
-      // console.log(localJSON);
 
       // Display contact/agent
       $("#display_check_inout").val(data[0]["ginfo_in"]);

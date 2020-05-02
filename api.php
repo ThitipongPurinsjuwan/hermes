@@ -86,8 +86,8 @@ $app->get('/ShowReservation/{bl_id}', function (Request $request, Response $resp
 
 
 
-$app->get('/updateReservation', function (Request $request, Response $response, array $args) {
-    $params = $request->getQueryParams();
+$app->post('/updateReservation', function (Request $request, Response $response, array $args) {
+    $params = $_POST;
     // print_r($params);
     // exit();
     $fname = $params['display_firstname'];
