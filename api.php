@@ -23,9 +23,8 @@ $config = [
 $app = new \Slim\App($config);
 
 // DIC configuration
-$container = $app->getContainer();
-
-
+$container = $app->getContainer()
+;
 // PDO database library 
 $container['db'] = function ($c) {
     $settings = $c->get('settings')['db'];
@@ -36,11 +35,11 @@ $container['db'] = function ($c) {
     );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
     return $pdo;
 };
 
-$app->get('/get', function (Request $request, Response $response, array $args) {
+// Code Group 4
+$app->get('/get_test', function (Request $request, Response $response, array $args) {
     $sql = "select * from book_log bl
     join reservation_info r
     on bl.bl_reservation = r.resinfo_id
@@ -61,7 +60,6 @@ $app->get('/get', function (Request $request, Response $response, array $args) {
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
-
 $app->get('/ShowReservation/{bl_id}', function (Request $request, Response $response, array $args) {
     $bl_id = $args['bl_id'];
     $sql = "select * from book_log bl
@@ -85,9 +83,6 @@ $app->get('/ShowReservation/{bl_id}', function (Request $request, Response $resp
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
-
-
-
 $app->post('/updateReservation', function (Request $request, Response $response, array $args) {
     $params = $_POST;
     $fname = $params['display_firstname'];
@@ -111,7 +106,6 @@ $app->post('/updateReservation', function (Request $request, Response $response,
         return $this->response->withJson(array('message' => 'false'));
     }
 });
-
 $app->post('/updateGuest', function (Request $request, Response $response, array $args) {
     $params = $_POST;
     $fname = $params['display_guest_firstname'];
@@ -134,10 +128,9 @@ $app->post('/updateGuest', function (Request $request, Response $response, array
         return $this->response->withJson(array('message' => 'false'));
     }
 });
+// End Code Group 4
 
-
-
-// code group 3
+// End Code Group 3
 $app->get('/addroom/{id}', function (Request $request, Response $response, array $args) {
     $id = $args['id'];
     $sql = "SELECT *from reservation_info re 
@@ -147,13 +140,11 @@ $app->get('/addroom/{id}', function (Request $request, Response $response, array
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
-
 $app->get('/room', function (Request $request, Response $response, array $args) {
     $sql = "SELECT * from rooms r join room_status rs on r.room_status = rs.rstatus_id WHERE rs.rstatus_eng='Avaliable'";
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
-
 $app->post('/saveadd/{bl_id}/{room_id}', function (Request $request, Response $response, array $args) {
     $bl_id = $args['bl_id'];
     $room_id = $args['room_id'];
@@ -180,8 +171,58 @@ $app->post('/saveadd/{bl_id}/{room_id}', function (Request $request, Response $r
     FROM guest_info WHERE ginfo_id = $bl_ginfo";
     $this->db->query($sql3);
 
-    $sql4 = "UPDATE rooms set room_status ='0'where room_id = '$room_id'";
+    $sql4 = "UPDATE rooms set room_status ='2'where room_id = '$room_id'";
     $this->db->query($sql4);
 });
+// End Code Group 3
 
+// Code Group 5
+$app->get('/getdb/{idcheck}', function (Request $request, Response $response, array $args) {
+    $id = $args['idcheck'];
+    $sql = "Select * from guest_info join rooms
+            on ginfo_room = room_id 
+            join room_type
+            on room_type = rtype_id
+            join building
+            on room_building = building_id
+            join room_view
+            on room_view = rview_id
+            join book_log
+            on bl_ginfo = ginfo_id
+            where ginfo_id=".$id;
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $this->response->withJson($sth);
+});
+$app->get('/getNewRoom/{idcheck}', function (Request $request, Response $response, array $args) {
+    $id = $args['idcheck'];
+    $sql = "Select * from rooms join room_type 
+            on room_type = rtype_id
+            join building
+            on room_building = building_id
+            join room_view 
+            on room_view = rview_id
+            where room_id ='".$id."'";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+$app->get('/getRoom', function (Request $request, Response $response, array $args) {
+    $sql = "Select * from rooms r join room_status rs on r.room_status = rs.rstatus_id where rs.rstatus_eng='Avaliable'";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+$app->post('/updateRoom/{bl_id}/{old_room}/{new_room}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['bl_id'];
+    $old_room = $args['old_room'];
+    // print_r($old_room);
+    // exit();
+    $new_room = $args['new_room'];
+    $sql = "UPDATE rooms SET room_status = '1' WHERE room_name = '$old_room'";
+    $this->db->query($sql);
+    $sql2 = "UPDATE book_log SET bl_room = $new_room where bl_id = $bl_id";
+    $this->db->query($sql2);
+    $sql3 = "UPDATE rooms SET room_status = '2' WHERE room_id = '$new_room'";
+    $this->db->query($sql3);
+});
+// End Code Group 5
 $app->run();
