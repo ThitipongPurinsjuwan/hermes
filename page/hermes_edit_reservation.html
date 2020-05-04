@@ -295,8 +295,10 @@
                                         <div class="col-md-2">
                                             <div class="text-md-right">
                                                 <h4><a id="save_update_guest" href="" data-toggle="modal"
-                                                        data-target="#confirm_update_guest">S</a> <a href="">C</a> <a
-                                                        href="" id="a_move_room" data-toggle="modal" data-target="#move_room">M</a></h4>
+                                                        data-target="#confirm_update_guest">S</a> <a href=""
+                                                        data-toggle="modal" data-target="#cancel_guest_reservation"
+                                                        id="cancel_guest">C</a> <a href="" id="a_move_room"
+                                                        data-toggle="modal" data-target="#move_room">M</a></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -316,7 +318,7 @@
                                                         <!-- store id guest -->
                                                         <input style="display:none;" type="text" name="display_guest_id"
                                                             id="display_guest_id" class="form-control" placeholder="id">
-                                                            <!-- End Store -->
+                                                        <!-- End Store -->
                                                         <input type="text" name="display_guest_firstname"
                                                             id="display_guest_firstname" class="form-control"
                                                             placeholder="first name">
@@ -372,19 +374,19 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirm_updateTitle">UPDATE DATABASE</h5>
+                            <h2 class="modal-title" id="confirm_updateTitle">UPDATE DATABASE</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to <strong>Save</strong> this <strong>CONTACT</strong> into the
-                            database?
+                            <label>Are you sure you want to <strong>Save</strong> this <strong>CONTACT</strong> into the database?</label>
                         </div>
                         <div class="modal-footer">
                             <button id="btn_no" type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button id="btn_yes" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                            <button id="btn_yes" type="button" class="btn btn-primary"
+                                data-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>
@@ -394,7 +396,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirm_update_guestTitle">UPDATE DATABASE</h5>
+                            <h2 class="modal-title" id="confirm_update_guestTitle">UPDATE DATABASE</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -406,7 +408,8 @@
                         <div class="modal-footer">
                             <button id="btn_no_guest" type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button id="btn_yes_guest" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                            <button id="btn_yes_guest" type="button" class="btn btn-primary"
+                                data-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>
@@ -429,10 +432,10 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="width:45rem;">
                         <div class="modal-header">
-                            <div class="col-md-5">
-                                <h4 class="modal-title" id="add_roomLabel">ADD RESERVATION</h4>
+                            <div class="col-md-8">
+                                <h2 class="modal-title" id="add_roomLabel">ADD RESERVATION</h2>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-4">
                                 <div class="text-md-right">
                                     <h4><a href="" id="save_add_room">S</a> <a href="" id="move_add_room">M</a> <a
                                             href="" id="cancel_add_room" data-dismiss="modal">X</a>
@@ -500,19 +503,18 @@
 
 
             <!--      start  modal group 2    -->
-            <div class="modal fade" id="cancel_reservation" tabindex="-1" role="dialog"
-                aria-labelledby="cancel_reservationTitle" aria-hidden="true">
+            <div class="modal fade" id="cancel_guest_reservation" tabindex="-1" role="dialog"
+                aria-labelledby="cancel_guest_reservationTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="cancel_reservationTitle">Cancel
-                                Reservation</h5>
+                            <h2 class="modal-title" id="cancel_guest_reservationTitle">Cancel Reservation</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <label>Please explain,why you need to
+                            <label for="exampleInputEmail1">Please explain,why you need to
                                 cancel this reservation (more than 10 characters)?</label>
                             <input id="comment" name="comment" value="" type="text" class="form-control"
                                 placeholder="Please specify" min="10" required>
@@ -520,7 +522,32 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal"
-                                onclick="myFunction()">Save</button>
+                                id="save_comment">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="cancel_reservation" tabindex="-1" role="dialog"
+                aria-labelledby="cancel_reservationTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="cancel_reservationTitle">Cancel
+                                Reservation</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <label>Please explain,why you need to
+                                cancel this reservation (more than 10 character)?</label>
+                            <input id="comment_guest" name="comment_guest" value="" type="text" class="form-control"
+                                placeholder="Please specify" min="10" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                id="save_guest">Save</button>
                             <!-- <button onclik="myFunction()" type="button" class="btn btn-primary">Save</button> -->
                         </div>
                     </div>
@@ -537,7 +564,7 @@
                     <div class="modal-content" style="width:45rem;">
                         <div class="modal-header">
                             <div class="col-md-5">
-                                <h4 class="modal-title" id="move_roomLabel">Move Room</h4>
+                                <h2 class="modal-title" id="move_roomLabel">Move Room</h2>
                             </div>
                             <div class="col-md-7">
                                 <div class="text-md-right">
@@ -563,28 +590,28 @@
                                             </div>
                                             <span id="room_id"></span>
                                             <div class="col-md-4">
-                                                <label for="name">Room : <span id="oldroom" value=""> </span>(<span
+                                                <label for="name"><strong>Room :</strong> <span id="oldroom" value=""> </span>(<span
                                                         id="Room"> </span>) (<span id="Roomnew"> </span>)</label><br />
-                                                <label for="type">Type : (<span id="Type"> </span>) (<span id="Typenew">
+                                                <label for="type"><strong>Type :</strong> (<span id="Type"> </span>) (<span id="Typenew">
                                                     </span>)</label><br />
-                                                <label for="building">Building : (<span id="Building"> </span>) (<span
+                                                <label for="building"><strong>Building :</strong> (<span id="Building"> </span>) (<span
                                                         id="Buildingnew"> </span>)</label><br />
-                                                <label for="views">Views : (<span id="View"> </span>) (<span
+                                                <label for="views"><strong>Views :</strong> (<span id="View"> </span>) (<span
                                                         id="Viewnew"> </span>)</label><br />
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="price">Price : (<span id="Price"> </span>) (<span
+                                                <label for="price"><strong>Price :</strong> (<span id="Price"> </span>) (<span
                                                         id="Pricenew"> </span>)</label><br />
-                                                <label for="night">Night : (<span id="Night"> </span>) (<span
+                                                <label for="night"><strong>Night :</strong> (<span id="Night"> </span>) (<span
                                                         id="Nightnew"> </span>)</label><br />
-                                                <label for="totalprice">Total Price : (<span id="Total_Price"> </span>)
+                                                <label for="totalprice"><strong>Total Price :</strong> (<span id="Total_Price"> </span>)
                                                     (<span id="Total_Pricenew"> </span>)</label><br />
                                             </div>
                                         </div>
                                         <button id="btnConfirm" type="submit" data-dismiss="modal"
-                                            class="btn btn-info btn-fill pull-right">Comfirm</button>
+                                            class="btn btn-primary pull-right">Comfirm</button>
                                         <button id="btnReturn" type="submit" data-dismiss="modal"
-                                            class="btn btn-info btn-fill pull-left">Cancel</button>
+                                            class="btn btn-info pull-left">Cancel</button>
                                     </form>
                                 </div>
                                 <div class="clearfix"></div>

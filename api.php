@@ -225,4 +225,42 @@ $app->post('/updateRoom/{bl_id}/{old_room}/{new_room}', function (Request $reque
     $this->db->query($sql3);
 });
 // End Code Group 5
+
+// Code Group 2
+$app->get('/cancel/{bl_id}/{comment}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['bl_id'];
+    $res_comment = $args['comment'];
+    $sql = "SELECT * from reservation_info re
+    join book_log bl
+    on re.resinfo_id = bl.bl_reservation
+    WHERE bl.bl_id = $bl_id";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    $resinfo_id = ($sth[0]['resinfo_id']);
+    $sql1 = "UPDATE reservation_info 
+    set resinfo_flag = 1
+    WHERE resinfo_id = $resinfo_id";
+    $this->db->query($sql1);
+    $sql2 = "UPDATE reservation_info 
+    set resinfo_comments = '".$res_comment."' where resinfo_id = $resinfo_id ";
+    $this->db->query($sql2);
+});
+
+$app->get('/guest/{bl_id}/{comment}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['bl_id'];
+    $res_comment = $args['comment'];
+    $sql = "SELECT * from guest_info re
+    join book_log bl
+    on re.ginfo_id = bl.bl_ginfo
+    WHERE bl.bl_id = $bl_id";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    $resinfo_id = ($sth[0]['ginfo_id']);
+    $sql1 = "UPDATE guest_info 
+    set ginfo_flag = 1
+    WHERE ginfo_id = $resinfo_id";
+    $this->db->query($sql1);
+    $sql2 = "UPDATE guest_info 
+    set ginfo_comment = '".$res_comment."' where ginfo_id = $resinfo_id ";
+    $this->db->query($sql2);
+});
+// End Code Group 2
 $app->run();

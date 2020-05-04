@@ -10,7 +10,6 @@ $(() => {
     $("#btn_yes").click(function (e) {
       $.post(url, parameter, function (response) {
         if (response['message'] == "success") {
-          // alerat succes
           $('#modal_alert').modal('show');
           setTimeout(reload, 800);
         }
@@ -32,7 +31,6 @@ $(() => {
     $("#btn_yes_guest").click(function (e) {
       $.post(url, parameter, function (response) {
         if (response['message'] == "success") {
-          // alerat succes
           $('#modal_alert').modal('show');
           setTimeout(reload, 800);
         }
@@ -43,32 +41,18 @@ $(() => {
   });
 
 
-  // code group 3
+  // Code Group 3
   $("#save_add_room").click(save);
-// ENG code group 3
+  // End Code Group 3
 
-//start group 2
-  $(document).ready(function () {
-    var form = $("#form");
-    var id = $("#id").val();
-    form.submit(function (e) {
-      deleteStudent(id)
-      function deleteStudent(id) {
-        if (confirm("คุณต้องการบันทึกหรือไม่")) {
-          $.get("http://localhost/project_HeremsG2/hermesdb/api.php/del/" + id, {},
-            function (data, textStatus, jqXHR) {
-              // search();
-            }
-          );
-        }
-      }
-    });
-  });
-  //END group 2
+  // Code Group 2
+  $("#save_comment").click(cancel_resinfo);
+  $("#save_guest").click(cancel_guest);
+  //End Group 2
 
 });
 
-// function group 3
+// Function Group 3
 function save() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
@@ -96,25 +80,67 @@ function save() {
     },
   });
 }
-// END function group 3
+// End Function Group 3
 
-// function group 2
-function myFunction() {
-  var comment = $("#comment").val();
-  var id = 6;
-  updatecomment(comment, id);
-  function updatecomment(comment, id) {
-    $.get("http://localhost/project_HeremsG2/hermesdb/apiCancel.php/comment/" + id + "/" + comment, {},
-      function (data, textStatus, jqXHR) {
-        window.location.href = "http://localhost/project_HeremsG2/page/cancel.html";
-        // search();
-      }
-    );
-  }
+// Function Group 2
+function cancel_resinfo() {
+  var query = window.location.search.substring(1);
+  var vars = query.split("=");
+  var ID = vars[1];
+  var api_url = "http://localhost/hermes/api.php/cancel/";
+  var key1 = ID;
+  var key2 = $("#comment").val();
+  $.ajax({
+    type: "get",
+    url: api_url + key1 + "/" + key2,
+    success: function (result, status, xhr) {
+      alert("success");
+    },
+    error: function (xhr, status, error) {
+      alert(
+        "Result: " +
+        status +
+        " " +
+        error +
+        " " +
+        xhr.status +
+        " " +
+        xhr.statusText
+      );
+    },
+  });
 }
-// END function group 2
+function cancel_guest() {
+  var query = window.location.search.substring(1);
+  var vars = query.split("=");
+  var ID = vars[1];
+  var api_url = "http://localhost/hermes/api.php/guest/";
+  var key1 = ID;
+  var key2 = $("#comment_guest").val();
+  $.ajax({
+    type: "get",
+    url: api_url + key1 + "/" + key2,
+    success: function (result, status, xhr) {
+      alert("success");
+    },
+    error: function (xhr, status, error) {
+      alert(
+        "Result: " +
+        status +
+        " " +
+        error +
+        " " +
+        xhr.status +
+        " " +
+        xhr.statusText
+      );
+    },
+  });
+}
+// End Function Group 2
+
 
 // Public Function
-function reload(){
+function reload() {
   location.reload();
 }

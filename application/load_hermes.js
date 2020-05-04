@@ -1,16 +1,17 @@
 $(() => {
-  // input test
+  //------------------------------------------ Document Ready --------------------------------
+  
+  // Code Group 4
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
   var url =
     "http://localhost/hermes/api.php/ShowReservation/" + ID;
-  // input test
   getjson(url);
+ // End Code Group 4
 
 
-
-  // code group 3
+  // Code Group 3
   var urlAPI = "http://localhost/hermes/api.php/addroom/" + ID;
 
   $.getJSON(urlAPI, {
@@ -25,7 +26,7 @@ $(() => {
     })
     .fail(function (jqxhr, testStatus, error) { });
   showRoom();
-  //END code group 3
+  //End code group 3
 
   // Code Group 5
   $("#a_move_room").click(function (e) {
@@ -41,9 +42,11 @@ $(() => {
     $("#btnConfirm").click(saveRoom);
   });
   // End Code Group 5
+
+  //------------------------------------------End Document Ready --------------------------------
 });
 
-
+// Function Group 4
 function getjson(url) {
   $.getJSON(url, { format: "json" })
     .done(function (data) {
@@ -81,6 +84,7 @@ function getjson(url) {
       alert("fail");
     });
 }
+// End Function Group 4
 
 
 // function group 3
@@ -102,7 +106,8 @@ function showRoom() {
     })
     .fail(function (jqxhr, textStatus, error) { });
 }
-//End function group 3
+// End function group 3
+
 
 // Function Group 5
 function showNewRoom() {
