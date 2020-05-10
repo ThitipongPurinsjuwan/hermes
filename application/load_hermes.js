@@ -1,20 +1,15 @@
 $(() => {
-
   // input test
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var url =
-    "http://localhost/hermes/api.php/ShowReservation/" + ID;
+  var url = "http://localhost/hermes/api.php/ShowReservation/" + ID;
   // input test
-
 
   getjson(url);
 
-
-
   // code group 3
-  
+
   // var query = window.location.search.substring(1);
   // var vars = query.split("=");
   // var ID = vars[1];
@@ -30,19 +25,18 @@ $(() => {
       $("#tel1").val(data["0"]["resinfo_telno"]);
       $("#email1").val(data["0"]["resinfo_email"]);
     })
-    .fail(function (jqxhr, testStatus, error) { });
+    .fail(function (jqxhr, testStatus, error) {});
   showRoom();
-
 });
-
 
 function getjson(url) {
   $.getJSON(url, { format: "json" })
     .done(function (data) {
-
       // Display contact/agent
       $("#night_head").text(data[0]["ginfo_night"]);
-      $("#display_check_inout").val(data[0]["ginfo_in"] + " - " + data[0]["ginfo_out"]);
+      $("#display_check_inout").val(
+        data[0]["ginfo_in"] + " - " + data[0]["ginfo_out"]
+      );
       $("#display_id").val(data[0]["resinfo_id"]);
       $("#display_firstname").val(data[0]["resinfo_first_name"]);
       $("#display_lastname").val(data[0]["resinfo_last_name"]);
@@ -62,7 +56,7 @@ function getjson(url) {
       $("#display_roomviews").text(data[0]["rview_eng"]);
 
       // Display detail reser
-      display_guest_id
+      display_guest_id;
       $("#display_guest_id").val(data[0]["ginfo_id"]);
       $("#display_guest_firstname").val(data[0]["ginfo_first_name"]);
       $("#display_guest_lastname").val(data[0]["ginfo_last_name"]);
@@ -91,5 +85,5 @@ function showRoom() {
         select.insertBefore(option, select.lastChild);
       }
     })
-    .fail(function (jqxhr, textStatus, error) { });
+    .fail(function (jqxhr, textStatus, error) {});
 }

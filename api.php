@@ -134,6 +134,89 @@ $app->post('/updateGuest', function (Request $request, Response $response, array
         return $this->response->withJson(array('message' => 'false'));
     }
 });
+// DisplayRoom card 5
+$app->get('/DisplayRoom/{id}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['id'];
+    $sql="SELECT * from book_log bl join guest_info g
+    on bl.bl_ginfo = g.ginfo_id
+    where bl_id = $bl_id";
+    $sth = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+    $ginfo_first_name = $sth['ginfo_first_name'];
+    $ginfo_last_name = $sth['ginfo_last_name'];
+    $sql1 = "SELECT g.ginfo_room,r.room_name FROM hermes.guest_info g join rooms r
+    on g.ginfo_room = r.room_id
+    where g.ginfo_first_name = '$ginfo_first_name' AND g.ginfo_last_name ='$ginfo_last_name'";
+    $sth1 = $this->db->query($sql1)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth1);
+});
+// end DisplayRoom card 5 
+// gard 12
+$app->get('/ShowCheckin/{bl_id}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['bl_id'];
+    $sql = "SELECT * FROM book_log bl
+            join guest_info gi
+            on bl.bl_ginfo = gi.ginfo_id
+            join rooms rm
+            on bl.bl_room = rm.room_id
+            join room_type rt 
+            on rm.room_type = rt.rtype_id
+            join room_status rs
+            on bl.bl_status = rs.rstatus_id
+            join room_view rv 
+            on rm.room_view = rv.rview_id
+            join building b
+            on rm.room_building = b.building_id
+            where bl.bl_id = $bl_id";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+
+
+$app->post('/AddCheckinGuest', function (Request $request, Response $response, array $args) {
+    $params = $_POST;
+    // echo ("<pre>");
+    // print_r($params);
+    // print_r($_POST);
+    // echo ("<pre>");
+    // exit;
+    $bl_id = $params['bl_id_add'];
+    $ginfo_first_name = $params['display_firstname_checkinguest'];
+    $ginfo_last_name = $params['display_lastname_checkinguest'];
+    $ginfo_telno = $params['display_phone_checkinguest'];
+    $ginfo_passport_id = $params['display_passport_checkinguest'];
+    $ginfo_birthday = $params['display_HBD_checkinguest'];
+    $ginfo_nation = $params['display_nation_checkinguest'];
+    $ginfo_email = $params['display_email_checkinguest'];
+    $ginfo_sex = $params['display_sex_checkinguest'];
+    $bl_incbreakfast = $params['display_incbreakfast_checkinguest'];
+    $bl_breakfast = $params['display_breakfast_checkinguest'];
+    $bl_price = $params['display_price_checkinguest'];
+
+    try {
+        $sql = "SELECT * from guest_info g
+                join book_log bl
+                on  g.ginfo_id = bl.bl_ginfo
+                WHERE bl.bl_id = $bl_id";
+        $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $ginfo_id = $sth['ginfo_id'];
+        $sql1 = "INSERT INTO guest_info(ginfo_first_name, ginfo_last_name, ginfo_telno, ginfo_passport_id, ginfo_birthday, ginfo_nation, ginfo_email, ginfo_sex)
+                VALUES ('$ginfo_first_name', '$ginfo_last_name', '$ginfo_telno', '$ginfo_passport_id', '$ginfo_birthday', '$ginfo_nation', '$ginfo_email', '$ginfo_sex')
+                WHERE ginfo_id = $ginfo_id";
+        $this->db->query($sql1);
+
+        $sql2 = "INSERT INTO book_log(bl_incbreakfast, bl_breakfast, bl_price)
+            VALUES ('$bl_incbreakfast', '$bl_breakfast', '$bl_price')
+            WHERE bl_id = $bl_id";
+        $this->db->query($sql2);
+
+        return $this->response->withJson(array('message' => 'success'));
+    } catch (PDOException $e) {
+        return $this->response->withJson(array('message' => 'false'));
+    }
+});
+
+// end gard 12
+
 
 
 
@@ -183,5 +266,6 @@ $app->post('/saveadd/{bl_id}/{room_id}', function (Request $request, Response $r
     $sql4 = "UPDATE rooms set room_status ='0'where room_id = '$room_id'";
     $this->db->query($sql4);
 });
+
 
 $app->run();
