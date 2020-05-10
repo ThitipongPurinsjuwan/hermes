@@ -181,9 +181,10 @@
                                     <h4 class="card-title" id="result">Modify or Cancel this booking</h4>
                                 </div>
                                 <div class="col-md-4 text-right">
-                                    <button type="button" id="btn_add" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#add_room"><i class="nc-icon nc-simple-add"></i> Add</button>
-                                    <button type="button" id="btn_close" class="btn btn-info"><i
+                                    <button type="button" id="btn_add" class="btn btn-primary btn-round"
+                                        data-toggle="modal" data-target="#add_room"><i
+                                            class="nc-icon nc-simple-add"></i> Add</button>
+                                    <button type="button" id="btn_close" class="btn btn-info btn-round"><i
                                             class="nc-icon nc-simple-remove"></i> Close</button>
                                 </div>
                             </div>
@@ -210,20 +211,27 @@
                                 <!--end row contact -->
                                 <!-- row form edit data -->
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="form-group">
-                                            <label>Check In - Check Out (<label id="night_head">&</label>
+                                            <label>Check In </label>
+                                            <input class="form-control" type="date" id="display_check_in"
+                                                name="display_check_in" value="" placeholder="Check in">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label>Check Out (<strong id="night_head"></strong>
                                                 nights)</label>
-                                            <input type="text" class="form-control" id="display_check_inout"
-                                                placeholder="Check in - check out" value="">
+                                            <input class="form-control" type="date" id="display_check_out"
+                                                name="display_check_out" value="" placeholder="Check out">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Agency</label>
-                                            <select class="form-control">
-                                                <option>Booking</option>
-                                                <option>2</option>
+                                            <select class="form-control" name="agency_reservation"
+                                                id="agency_reservation">
+                                                <option value="defult">select</option>
                                             </select>
                                         </div>
                                     </div>
@@ -235,6 +243,8 @@
                                             <!-- style="display:none;" -->
                                             <input style="display:none;" type="text" name="display_id" id="display_id"
                                                 class="form-control" placeholder="id">
+                                            <input style="display:none;" type="text" name="display_guest_id"
+                                                id="display_guest_id" class="form-control" placeholder="id">
                                             <input type="text" name="display_firstname" id="display_firstname"
                                                 class="form-control hide" placeholder="first name">
                                         </div>
@@ -304,7 +314,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <label>Room : <strong id="display_room"></strong></label><br>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Room :</label>
+                                                    <select class="form-control" id="display_guest_room"
+                                                        name="display_guest_room">
+                                                        <option value="defult">Room</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- <label>Room : <strong id="display_room"></strong></label><br> -->
                                             <label>Type : <strong id="display_roomtype"></strong></label><br>
                                             <label>Building : <strong id="display_roombuilding"></strong></label><br>
                                             <label>Views : <strong id="display_roomviews"></strong></label><br>
@@ -380,7 +399,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <label>Are you sure you want to <strong>Save</strong> this <strong>CONTACT</strong> into the database?</label>
+                            <label>Are you sure you want to <strong>Save</strong> this <strong>CONTACT</strong> into the
+                                database?</label>
                         </div>
                         <div class="modal-footer">
                             <button id="btn_no" type="button" class="btn btn-secondary"
@@ -391,6 +411,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal alert update -->
             <div class="modal fade" id="confirm_update_guest" tabindex="-1" role="dialog"
                 aria-labelledby="confirm_update_guestTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -414,6 +435,7 @@
                     </div>
                 </div>
             </div>
+            <!-- End Modal alert update -->
             <!-- modal alert -->
             <div id="modal_alert" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -427,18 +449,24 @@
 
 
             <!-- modal add room -->
+
+            <!-- Modal -->
             <div class="modal fade" id="add_room" tabindex="-1" role="dialog" aria-labelledby="add_roomLabel"
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="width:45rem;">
+                    <div class="modal-content" style="width: 45rem;">
                         <div class="modal-header">
-                            <div class="col-md-8">
-                                <h2 class="modal-title" id="add_roomLabel">ADD RESERVATION</h2>
+                            <div class="col-md-5">
+                                <h4 class="modal-title" id="add_roomLabel">
+                                    ADD RESERVATION
+                                </h4>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-7">
                                 <div class="text-md-right">
-                                    <h4><a href="" id="save_add_room">S</a> <a href="" id="move_add_room">M</a> <a
-                                            href="" id="cancel_add_room" data-dismiss="modal">X</a>
+                                    <h4>
+                                        <a href="" id="save_add_room">S</a>
+                                        <a href="" id="move_add_room">M</a>
+                                        <a href="" id="cancel_add_room" data-dismiss="modal">X</a>
                                     </h4>
                                 </div>
                             </div>
@@ -446,54 +474,54 @@
                                 <span aria-hidden="true">&times;</span>
                             </button> -->
                         </div>
-                        <div class="modal-body" style="width:45rem;">
-
+                        <div class="modal-body" style="width: 45rem;">
                             <!-- start code -->
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="">Add Room </label>
-                                            <select class="form-control" id="select">
-                                                <option value="defult">Room</option>
-                                            </select>
+                            <form id="save_form" method="POST">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-1"></div>
+                                        <input type="text" name="id_bl_save" id="id_bl_save" style="display:none;">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="">Add Room </label>
+                                                <select class="form-control" id="select">
+                                                    <option value="defult">Room</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group ">
-                                            <label for="">First Name : </label>
-                                            <br>
-                                            <input type="text" class="form-control" placeholder="First Name" id="fname1"
-                                                readonly />
-                                            <br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Last Name : </label>
-                                            <br>
-                                            <input type="text" class="form-control" placeholder="Last Name" id="lname1"
-                                                readonly />
-                                            <br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Phone : </label>
-                                            <br>
-                                            <input type="text" class="form-control" placeholder="Phone" id="tel1"
-                                                readonly />
-                                            <br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">E-mail : </label>
-                                            <br>
-                                            <input type="text" class="form-control" placeholder="Phone" id="email1"
-                                                readonly />
-                                            <br>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="">First Name : </label>
+                                                <br />
+                                                <input type="text" class="form-control" placeholder="First Name"
+                                                    id="fname1" readonly />
+                                                <br />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Last Name : </label>
+                                                <br />
+                                                <input type="text" class="form-control" placeholder="Last Name"
+                                                    id="lname1" readonly />
+                                                <br />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">Phone : </label>
+                                                <br />
+                                                <input type="text" class="form-control" placeholder="Phone" id="tel1"
+                                                    readonly />
+                                                <br />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">E-mail : </label>
+                                                <br />
+                                                <input type="text" class="form-control" placeholder="Phone" id="email1"
+                                                    readonly />
+                                                <br />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
                             <!-- end code -->
                         </div>
                     </div>
@@ -590,21 +618,24 @@
                                             </div>
                                             <span id="room_id"></span>
                                             <div class="col-md-4">
-                                                <label for="name"><strong>Room :</strong> <span id="oldroom" value=""> </span>(<span
-                                                        id="Room"> </span>) (<span id="Roomnew"> </span>)</label><br />
-                                                <label for="type"><strong>Type :</strong> (<span id="Type"> </span>) (<span id="Typenew">
+                                                <label for="name"><strong>Room :</strong>(<span id="Room"> </span>)
+                                                    (<span id="Roomnew">
                                                     </span>)</label><br />
-                                                <label for="building"><strong>Building :</strong> (<span id="Building"> </span>) (<span
-                                                        id="Buildingnew"> </span>)</label><br />
-                                                <label for="views"><strong>Views :</strong> (<span id="View"> </span>) (<span
-                                                        id="Viewnew"> </span>)</label><br />
+                                                <label for="type"><strong>Type :</strong> (<span id="Type"> </span>)
+                                                    (<span id="Typenew">
+                                                    </span>)</label><br />
+                                                <label for="building"><strong>Building :</strong> (<span id="Building">
+                                                    </span>) (<span id="Buildingnew"> </span>)</label><br />
+                                                <label for="views"><strong>Views :</strong> (<span id="View"> </span>)
+                                                    (<span id="Viewnew"> </span>)</label><br />
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="price"><strong>Price :</strong> (<span id="Price"> </span>) (<span
-                                                        id="Pricenew"> </span>)</label><br />
-                                                <label for="night"><strong>Night :</strong> (<span id="Night"> </span>) (<span
-                                                        id="Nightnew"> </span>)</label><br />
-                                                <label for="totalprice"><strong>Total Price :</strong> (<span id="Total_Price"> </span>)
+                                                <label for="price"><strong>Price :</strong> (<span id="Price"> </span>)
+                                                    (<span id="Pricenew"> </span>)</label><br />
+                                                <label for="night"><strong>Night :</strong> (<span id="Night"> </span>)
+                                                    (<span id="Nightnew"> </span>)</label><br />
+                                                <label for="totalprice"><strong>Total Price :</strong> (<span
+                                                        id="Total_Price"> </span>)
                                                     (<span id="Total_Pricenew"> </span>)</label><br />
                                             </div>
                                         </div>
