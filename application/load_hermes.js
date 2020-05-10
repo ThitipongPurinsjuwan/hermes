@@ -28,7 +28,6 @@ $(() => {
       format: "json",
     })
       .done(function (data) {
-        console.log(data);
         $("#id_bl_save").val(ID);
         $("#fname1").val(data["0"]["resinfo_first_name"]);
         $("#lname1").val(data["0"]["resinfo_last_name"]);
@@ -37,10 +36,7 @@ $(() => {
       })
       .fail(function (jqxhr, testStatus, error) { });
     showRoom();
-    // phase 2
-    // var query = window.location.search.substring(1);
-    // var vars = query.split("=");
-    // var ID = vars[1];
+
     $("#id_bl_save").val(ID);
     $("#save_add_room").click(function (e) {
       e.preventDefault();
@@ -49,19 +45,14 @@ $(() => {
 
     $("#save_form").on("submit", function (e) {
       var parameter = $(this).serializeArray();
-      // console.log("1");
-      // console.log(parameter);
-      // console.log("1");
+      console.log("para : "+JSON.stringify(parameter));
       var url = "http://localhost/hermes/api.php/saveadd";
       $.post(url, parameter, function (response) {
-        // console.log("4");
-        // console.log(response);
-        // console.log("4");
         if (response["message"] == "success") {
           $("#modal_alert").modal("show");
+          setTimeout(reload, 800);
         }
       });
-      console.log("3");
       e.preventDefault();
     });
   });
@@ -166,7 +157,6 @@ function show_guest_room(room_id) {
   data.gCheckIn = $("#display_check_in").val().trim();
   data.gCheckOut = $("#display_check_out").val().trim();
   $.post(url, data, function (data) {
-    console.log(data);
     for (var i = 0; i < data.length; i++) {
       var option = document.createElement("OPTION"),
         txt = document.createTextNode(data[i]["room_name"]);
@@ -199,7 +189,7 @@ function show_guest_detail_room(room_id) {
       alert("fail");
     });
 }
-// End Function Group 4
+//--------------------------------------------------------[ End Function Group 4 ] ------------------------------------
 
 
 
@@ -224,7 +214,7 @@ function showRoom() {
     })
     .fail(function (jqxhr, textStatus, error) { });
 }
-// End function group 3
+//--------------------------------------------------------[ End Function Group 3 ] ------------------------------------
 
 
 
@@ -238,6 +228,7 @@ function showNewRoom() {
   $.getJSON(urlAPI, { format: "json" })
     .done(function (data) {
       $("#Roomnew").text(data["0"]["room_name"]);
+      $("#Roomnew").val(data["0"]["room_id"]);
       $("#Typenew").text(data["0"]["rtype_eng"]);
       $("#Buildingnew").text(data["0"]["building_name"]);
       $("#Viewnew").text(data["0"]["rview_eng"]);
@@ -269,33 +260,19 @@ function selectionLoad() {
     })
 }
 function saveRoom() {
-  var api_url = "http://localhost/hermes/api.php/updateRoom/";
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const key1 = urlParams.get('id');
-  var key2 = $("#Room").text();
-  var key3 = $("#select2").val();
-  $.ajax({
-    type: "POST",
-    url: api_url + key1 + "/" + key2 + "/" + key3,
-
-    success: function (result, status, xhr) {
+  var url = "http://localhost/hermes/api.php/updateRoom";
+  var data2 = new Object();
+  data2.ginfo_id = parseInt($("#display_guest_id").val());
+  data2.gCheckIn = $("#display_check_in").val().trim();
+  data2.gCheckOut = $("#display_check_out").val().trim();
+  data2.gnewRoom = $("#Roomnew").val();
+  data2.goldRoom = $("#display_guest_room").val();
+  $.post(url, data2, function (response) {
+    console.log(response);
+    if (response['message'] == "success") {
       $('#modal_alert').modal('show');
       setTimeout(reload, 800);
-    },
-    error: function (xhr, status, error) {
-      alert(
-        api_url +
-        "Result: " +
-        status +
-        " " +
-        error +
-        " " +
-        xhr.status +
-        " " +
-        xhr.statusText
-      );
-    },
+    }
   });
 };
 function guest_room_name(room_id) {
@@ -308,4 +285,9 @@ function guest_room_name(room_id) {
       id = "false";
     });
 }
-// End Function Group 5
+//--------------------------------------------------------[ End Function Group 5 ] ------------------------------------
+
+//--------------------------------------------------------[ Function Public ] ------------------------------------
+function reload() {
+  location.reload();
+}

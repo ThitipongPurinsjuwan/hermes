@@ -306,7 +306,7 @@
                                             <div class="text-md-right">
                                                 <h4><a id="save_update_guest" href="" data-toggle="modal"
                                                         data-target="#confirm_update_guest">S</a> <a href=""
-                                                        data-toggle="modal" data-target="#cancel_guest_reservation"
+                                                        data-toggle="modal" data-target="#cancel_guest_comment"
                                                         id="cancel_guest">C</a> <a href="" id="a_move_room"
                                                         data-toggle="modal" data-target="#move_room">M</a></h4>
                                             </div>
@@ -484,7 +484,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">Add Room </label>
-                                                <select class="form-control" id="select">
+                                                <select class="form-control" name="select" id="select">
                                                     <option value="defult">Room</option>
                                                 </select>
                                             </div>
@@ -531,12 +531,12 @@
 
 
             <!--      start  modal group 2    -->
-            <div class="modal fade" id="cancel_guest_reservation" tabindex="-1" role="dialog"
-                aria-labelledby="cancel_guest_reservationTitle" aria-hidden="true">
+            <div class="modal fade" id="cancel_reservation" tabindex="-1" role="dialog"
+                aria-labelledby="cancel_reservationTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="modal-title" id="cancel_guest_reservationTitle">Cancel Reservation</h2>
+                            <h2 class="modal-title" id="cancel_reservationTitle">Cancel Reservation</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -555,13 +555,13 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="cancel_reservation" tabindex="-1" role="dialog"
-                aria-labelledby="cancel_reservationTitle" aria-hidden="true">
+            <div class="modal fade" id="cancel_guest_comment" tabindex="-1" role="dialog"
+                aria-labelledby="cancel_guest_commentTitle" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="modal-title" id="cancel_reservationTitle">Cancel
-                                Reservation</h2>
+                            <h2 class="modal-title" id="cancel_guest_commentTitle">Cancel
+                                Guest</h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
