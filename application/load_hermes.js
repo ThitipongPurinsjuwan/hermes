@@ -1,6 +1,5 @@
 $(() => {
   //------------------------------------------ Document Ready --------------------------------
-  
   // Code Group 4
   var query = window.location.search.substring(1);
   var vars = query.split("=");
