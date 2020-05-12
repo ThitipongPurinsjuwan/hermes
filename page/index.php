@@ -170,7 +170,7 @@
                 </div>
             </nav>
             <!-- End Navbar -->
-            <div class="container">
+            <div class="content">
                 <div class="card">
                     <div class="row">
                         <div class="col-md-12">
@@ -200,7 +200,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form id="infoid" action="<?php echo $base_url . "page/hermes_edit_reservation.php" ?>" method="GET">
+                                        <form id="infoid" action="<?php echo base_url("page/hermes_edit_reservation.php")?>" method="GET">
                                             <table class="table table-striped table-hover ">
                                                 <thead>
                                                     <tr class="bg-primary text-white">
