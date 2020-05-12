@@ -28,11 +28,20 @@ $(() => {
   });
   $("#form_edit_guest").on("submit", function (e) {
     var parameter = $(this).serializeArray();
-    console.log("param : "+JSON.stringify(parameter));
-    var url = "http://localhost/hermes/api.php/updateGuest";
+    // console.log("param : "+JSON.stringify(parameter));
+    // var url = base_url("api.php/updateGuest");
     $("#btn_yes_guest").click(function (e) {
+      var url_guest = base_url("api.php/get_Allguest");
+      $.getJSON(url_guest, { format: "json" })
+        .done(function (data) {
+          
+        })
+        .fail(function (jqxhr, textStatus, error) {
+          alert("fail");
+        });
+
+
       $.post(url, parameter, function (response) {
-        console.log(response);
         if (response['message'] == "success") {
           $("#modal_alert").modal("show");
           setTimeout(reload, 800);
@@ -42,7 +51,7 @@ $(() => {
     });
     e.preventDefault();
   });
-  $("#btn_close").click(function (e){
+  $("#btn_close").click(function (e) {
     redirect();
   });
 
@@ -75,7 +84,7 @@ function cancel_resinfo() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var url = "http://localhost/hermes/api.php/cancel/"+ID+"/"+$("#comment").val();
+  var url = base_url("api.php/cancel/" + ID + "/" + $("#comment").val());
   $.ajax({
     type: "get",
     url: url,
@@ -92,7 +101,7 @@ function cancel_resinfo() {
         " " +
         xhr.status +
         " " +
-        xhr.statusText+" Please,fill the reason."
+        xhr.statusText + " Please,fill the reason."
       );
     },
   });
@@ -101,7 +110,7 @@ function cancel_guest() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var api_url = "http://localhost/hermes/api.php/guest/";
+  var api_url = base_url("api.php/guest/");
   var key1 = ID;
   var key2 = $("#comment_guest").val();
   $.ajax({
@@ -120,7 +129,7 @@ function cancel_guest() {
         " " +
         xhr.status +
         " " +
-        xhr.statusText+" Please,fill the reason."
+        xhr.statusText + " Please,fill the reason."
       );
     },
   });
@@ -135,7 +144,7 @@ function reload() {
   location.reload();
 }
 function redirect() {
-  window.location.replace("http://localhost/hermes/page/");
+  window.location.replace(base_url("page/"));
 }
 
 //--------------------------------------------------------[ End Function Public ] ------------------------------------

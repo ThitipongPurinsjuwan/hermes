@@ -139,10 +139,10 @@ $app->post('/updateGuest', function (Request $request, Response $response, array
     $email = $params['display_guest_email'];
     $id = $params['display_guest_id'];
 
-    $sql = "UPDATE guest_info 
-    set ginfo_first_name = '$fname', 
-    ginfo_last_name = '$lname', 
-    ginfo_email = '$email', 
+    $sql = "UPDATE guest_info
+    set ginfo_first_name = '$fname',
+    ginfo_last_name = '$lname',
+    ginfo_email = '$email',
     ginfo_telno = '$telno'
     WHERE ginfo_id = $id";
 
@@ -155,6 +155,11 @@ $app->post('/updateGuest', function (Request $request, Response $response, array
 });
 $app->get('/get_agency', function (Request $request, Response $response, array $args) {
     $sql = "SELECT * from agency;";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+$app->get('/get_Allguest', function (Request $request, Response $response, array $args) {
+    $sql = "SELECT * from guest_info;";
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
@@ -177,7 +182,8 @@ $app->post('/show_room_guest', function (Request $request, Response $response, a
     //     return $this->response->withJson(array('message' => 'false'));
     // }
 });
-// End Code Group 4
+
+//--------------------------------------------------------[ End Code Group 4 ] ------------------------------------
 
 
 
