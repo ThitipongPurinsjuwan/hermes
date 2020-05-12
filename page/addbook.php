@@ -12,31 +12,31 @@
 =========================================================
 
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+<?php include "../function.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-  <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url("/assets/img/apple-icon.png") ?>">
+  <link rel="icon" type="image/png" href="<?php echo base_url("/assets/img/favicon.ico") ?>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative
     Tim
   </title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
-    name="viewport" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport" />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- CSS Files -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+  <link href="<?php echo base_url("/assets/css/bootstrap.min.css") ?>" rel="stylesheet" />
+  <link href="<?php echo base_url("/assets/css/light-bootstrap-dashboard.css?v=2.0.0") ?> " rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="../assets/css/demo.css" rel="stylesheet" />
-  <script src="../js/jquery-3.5.0.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+  <link href="<?php echo base_url("/assets/css/demo.css") ?>" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=your_api_key_here"></script>
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
@@ -114,8 +114,7 @@
       <nav class="navbar navbar-expand-lg" color-on-scroll="500">
         <div class="container-fluid">
           <a class="navbar-brand" href="#pablo"> Table List </a>
-          <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
@@ -156,8 +155,7 @@
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="no-icon">Dropdown</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -190,26 +188,21 @@
                       <div class="col-md-12">
                         <nav>
                           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-start-tab" data-toggle="tab" href="#nav-start"
-                              role="tab" aria-controls="nav-start" aria-selected="true">Start</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
-                              role="tab" aria-controls="nav-contact" aria-selected="false">Contact information</a>
-                            <a class="nav-item nav-link" id="nav-guest-tab" data-toggle="tab" href="#nav-guest"
-                              role="tab" aria-controls="nav-guest" aria-selected="false">Guset information</a>
-                            <a class="nav-item nav-link" id="nav-summary-tab" data-toggle="tab" href="#nav-summary"
-                              role="tab" aria-controls="nav-summary" aria-selected="false">Summary</a>
+                            <a class="nav-item nav-link active" id="nav-start-tab" data-toggle="tab" href="#nav-start" role="tab" aria-controls="nav-start" aria-selected="true">Start</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact information</a>
+                            <a class="nav-item nav-link" id="nav-guest-tab" data-toggle="tab" href="#nav-guest" role="tab" aria-controls="nav-guest" aria-selected="false">Guset information</a>
+                            <a class="nav-item nav-link" id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab" aria-controls="nav-summary" aria-selected="false">Summary</a>
                           </div>
                         </nav>
                         <!--start-->
                         <div class="tab-content" id="nav-tabContent">
-                          <div class="tab-pane fade show active" id="nav-start" role="tabpanel"
-                            aria-labelledby="nav-start-tab">
+                          <div class="tab-pane fade show active" id="nav-start" role="tabpanel" aria-labelledby="nav-start-tab">
                             <div class="row">
                               <div class="col">
                                 <div class="row m-3">
                                   <div class="col-md-4">
                                     <form id="pai" method="GET">
-                              
+
                                       <p>
                                         Date checkin:
                                         <input class="form-control" type="text" name="datein" value="" id="datein" />
@@ -222,7 +215,7 @@
                                       </p>
                                   </div>
                                   <div class="col-md-4">
-                   
+
                                     <p>
                                       Date checkout:
                                       <input class="form-control" type="text" name="dateout" value="" id="dateout" />
@@ -339,8 +332,7 @@
                                   <tr>
                                     <td>Last name:</td>
                                     <td>
-                                      <br /><input type="text" name="lastname" id="glname" value=""
-                                        class="form-control" />
+                                      <br /><input type="text" name="lastname" id="glname" value="" class="form-control" />
                                     </td>
                                   </tr>
                                 </div>
@@ -350,8 +342,7 @@
                                   <tr>
                                     <td>Phone:</td>
                                     <td>
-                                      <br /><input type="text" name="phoneg" id="gphone" value=""
-                                        class="form-control" />
+                                      <br /><input type="text" name="phoneg" id="gphone" value="" class="form-control" />
                                     </td>
                                   </tr>
                                 </div>
@@ -591,8 +582,7 @@
                                     </div>
                                   </div>
                                   <div class="col">
-                                    <button type="button" class="btn btn-primary btn-block btn-round"
-                                      onclick="location.href='index.html'" id="btn_confirm">
+                                    <button type="button" class="btn btn-primary btn-block btn-round" onclick="location.href='index.php'" id="btn_confirm">
                                       Confirm
                                     </button>
                                   </div>
@@ -653,21 +643,21 @@
   </div>
 </body>
 <!--   Core JS Files   -->
-<script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url("/assets/js/core/jquery.3.2.1.min.js")?>" type="text/javascript"></script>
+<script src="<?php echo base_url("/assets/js/core/popper.min.js") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("/assets/js/core/bootstrap.min.js") ?>" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../assets/js/plugins/bootstrap-switch.js"></script>
+  <script src="<?php echo base_url("/assets/js/plugins/bootstrap-switch.js") ?>"></script>
 <!--  Google Maps Plugin    -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!--  Chartist Plugin  -->
-<script src="../assets/js/plugins/chartist.min.js"></script>
+<script src="<?php echo base_url("/assets/js/plugins/chartist.min.js") ?>"></script>
 <!--  Notifications Plugin    -->
-<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<script src="<?php echo base_url("/assets/js/plugins/bootstrap-notify.js") ?>"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+<script src="<?php echo base_url("/assets/js/light-bootstrap-dashboard.js?v=2.0.0") ?> " type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="../assets/js/demo.js"></script>
-<script src="../application/jquery1.js"></script>
+<script src="<?php echo base_url("/assets/js/demo.js")?>"></script>
+<script src="<?php echo base_url("/application/jquery1.js")?>"></script>
 
 </html>

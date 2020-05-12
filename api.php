@@ -38,8 +38,6 @@ $container['db'] = function ($c) {
 };
 
 
-
-
 //--------------------------------------------------------[ Code Group 4 ] ------------------------------------
 $app->get('/get_test', function (Request $request, Response $response, array $args) {
     $sql = "select * from book_log bl
@@ -110,7 +108,7 @@ $app->post('/updateReservation', function (Request $request, Response $response,
     $check_out = $params['display_check_out'];
     $agency_reservation = $params['agency_reservation'];
     $id = $params['display_id'];
-    $g_id = $_POST['display_guest_id'];
+    $g_id = $_POST['display_id_guest_contact'];
 
     $sql_update_reservation = "UPDATE reservation_info SET
     resinfo_first_name = '$fname',
@@ -190,8 +188,7 @@ $app->get('/addroom/{id}', function (Request $request, Response $response, array
     $sql = "SELECT *from reservation_info re 
     join book_log bl
     on  re.resinfo_id = bl.bl_reservation
-    WHERE re.resinfo_id = $id
-    group by re.resinfo_id";
+    WHERE bl.bl_id = $id";
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });

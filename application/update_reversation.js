@@ -1,5 +1,7 @@
 $(() => {
   //------------------------------------------ Document Ready --------------------------------
+  console.log(base_url("test"));
+
   $("#save_update").click(function (e) {
     e.preventDefault();
     $("#form_edit_contact").submit();
@@ -26,11 +28,13 @@ $(() => {
   });
   $("#form_edit_guest").on("submit", function (e) {
     var parameter = $(this).serializeArray();
+    console.log("param : "+JSON.stringify(parameter));
     var url = "http://localhost/hermes/api.php/updateGuest";
     $("#btn_yes_guest").click(function (e) {
       $.post(url, parameter, function (response) {
+        console.log(response);
         if (response['message'] == "success") {
-          $('#modal_alert').modal('show');
+          $("#modal_alert").modal("show");
           setTimeout(reload, 800);
         }
       });
@@ -38,13 +42,22 @@ $(() => {
     });
     e.preventDefault();
   });
-
+  $("#btn_close").click(function (e){
+    redirect();
+  });
 
 
   //--------------------------------------------------------[ Code Group 2 ] ------------------------------------
   $("#save_comment").click(cancel_resinfo);
   $("#save_guest").click(cancel_guest);
   //--------------------------------------------------------[ Code Group 2 ] ------------------------------------
+
+
+
+
+
+
+
 
   //------------------------------------------End Document Ready --------------------------------
   //------------------------------------------End Document Ready --------------------------------
@@ -67,7 +80,6 @@ function cancel_resinfo() {
     type: "get",
     url: url,
     success: function (result, status, xhr) {
-      console.log(result);
       $('#modal_alert').modal('show');
       setTimeout(redirect, 800);
     },

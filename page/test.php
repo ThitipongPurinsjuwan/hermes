@@ -13,8 +13,12 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="../assets/css/demo.css" rel="stylesheet" />
 </head>
-
 <body>
+<?php
+include "../function.php";
+
+// echo "url : ". 
+?>
     <form>
         <div class="col-md-2">
             <div class="form-group">

@@ -2,16 +2,18 @@ $(() => {
   //------------------------------------------ Document Ready --------------------------------
 
   //--------------------------------------------------------[ Code Group 4 ] ------------------------------------
+  
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var url =
-    "http://localhost/hermes/api.php/ShowReservation/" + ID;
+  var url = base_url("api.php/ShowReservation/"+ ID);
   getjson(url);
 
   $("#display_guest_room").change(function (e) {
     show_guest_detail_room($("#display_guest_room").val());
   });
+
+
   //--------------------------------------------------------[ End Code Group 4 ] ------------------------------------
 
 
@@ -45,7 +47,7 @@ $(() => {
 
     $("#save_form").on("submit", function (e) {
       var parameter = $(this).serializeArray();
-      console.log("para : "+JSON.stringify(parameter));
+      console.log("para : " + JSON.stringify(parameter));
       var url = "http://localhost/hermes/api.php/saveadd";
       $.post(url, parameter, function (response) {
         if (response["message"] == "success") {
@@ -68,7 +70,7 @@ $(() => {
     selectionLoad();
     // end load room
     guest_room_name($("#display_guest_room").val());
-    
+
     $("#Type").text($("#display_roomtype").text());
     $("#Building").text($("#display_roombuilding").text());
     $("#View").text($("#display_roomviews").text());
@@ -104,6 +106,8 @@ function getjson(url) {
       $("#display_email").val(data[0]["resinfo_email"]);
       $("#display_telephone").val(data[0]["resinfo_telno"]);
       $("#display_note").val(data[0]["resinfo_comments"]);
+      $("#display_id_guest_contact").val(data[0]["ginfo_id"]);
+
 
       // Display detail reser
       $("#head_room_name").text(data[0]["rtype_eng"]);
@@ -290,4 +294,14 @@ function guest_room_name(room_id) {
 //--------------------------------------------------------[ Function Public ] ------------------------------------
 function reload() {
   location.reload();
+}
+
+
+function base_url(path){
+  var host = window.location.origin;
+  // "http://localhost"
+  var pathArray = window.location.pathname.split( '/' );
+  // split path
+  return host+"/"+pathArray[1]+"/"+path;
+  // return http://localhost/hermes/+path
 }
