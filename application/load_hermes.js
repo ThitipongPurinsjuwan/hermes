@@ -10,7 +10,7 @@ $(() => {
   getjson(url);
 
   $("#display_guest_room").change(function (e) {
-    show_guest_detail_room($("#display_guest_room").val());
+    show_guest_detail_room($("#display_guest_room").val(),$("#display_id_reservation").val());
   });
 
 
@@ -95,18 +95,22 @@ $(() => {
 function getjson(url) {
   $.getJSON(url, { format: "json" })
     .done(function (data) {
+      localStorage.setItem("data",JSON.stringify(data));
 
       // Display contact/agent
       $("#night_head").text(data[0]["ginfo_night"]);
       $("#display_check_in").val(data[0]["ginfo_in"]);
       $("#display_check_out").val(data[0]["ginfo_out"]);
-      $("#display_id").val(data[0]["resinfo_id"]);
+      $("#display_id_reservation").val(data[0]["resinfo_id"]);
       $("#display_firstname").val(data[0]["resinfo_first_name"]);
       $("#display_lastname").val(data[0]["resinfo_last_name"]);
       $("#display_email").val(data[0]["resinfo_email"]);
       $("#display_telephone").val(data[0]["resinfo_telno"]);
       $("#display_note").val(data[0]["resinfo_comments"]);
       $("#display_id_guest_contact").val(data[0]["ginfo_id"]);
+      $("#display_book_log_id").val(data[0]["bl_id"]);
+      $("#display_book_log_room").val(data[0]["room_id"]);
+      
 
 
       // Display detail reser
@@ -129,7 +133,7 @@ function getjson(url) {
       $("#display_guest_telephone").val(data[0]["ginfo_telno"]);
 
       show_agency(data[0]['resinfo_agency']);
-      show_guest_room(data[0]["room_id"]);
+      show_guest_room(data[0]["bl_room"]);
     })
     .fail(function (jqxhr, textStatus, error) {
       alert("fail");
@@ -154,10 +158,10 @@ function show_agency(agency_id) {
     })
     .fail(function (jqxhr, textStatus, error) { });
 }
-function show_guest_room(room_id) {
-  var url = "http://localhost/hermes/api.php/show_room_guest";
+function show_guest_room(room_id) { // 0
+  var url = base_url("api.php/show_room_guest");
   var data = new Object();
-  data.ginfo_id = parseInt($("#display_guest_id").val());
+  data.reser_id = parseInt($("#display_id_reservation").val()); //1
   data.gCheckIn = $("#display_check_in").val().trim();
   data.gCheckOut = $("#display_check_out").val().trim();
   $.post(url, data, function (data) {
@@ -173,8 +177,8 @@ function show_guest_room(room_id) {
     }
   });
 }
-function show_guest_detail_room(room_id) {
-  var url = "http://localhost/hermes/api.php/Show_detail_room_guest/" + room_id;
+function show_guest_detail_room(room_id,reser_id) {
+  var url = base_url("api.php/Show_detail_room_guest/"+ room_id +"/"+reser_id);
   $.getJSON(url, { format: "json" })
     .done(function (data) {
       // Display detail reser
@@ -182,12 +186,19 @@ function show_guest_detail_room(room_id) {
       $("#head_guest_firstname").text(data[0]["ginfo_first_name"]);
       $("#head_guest_lastname").text(data[0]["ginfo_last_name"]);
 
-      // Display detail reser room
+      // // Display detail reser room
       $("#display_room_price").val(data[0]["room_price"]);
       $("#display_room").text(data[0]["room_name"]);
       $("#display_roomtype").text(data[0]["rtype_eng"]);
       $("#display_roombuilding").text(data[0]["building_name"]);
       $("#display_roomviews").text(data[0]["rview_eng"]);
+
+      //Display detail guest
+      $("#display_guest_id").val(data[0]["ginfo_id"]);
+      $("#display_guest_firstname").val(data[0]["ginfo_first_name"]);
+      $("#display_guest_lastname").val(data[0]["ginfo_last_name"]);
+      $("#display_guest_email").val(data[0]["ginfo_email"]);
+      $("#display_guest_telephone").val(data[0]["ginfo_telno"]);
     })
     .fail(function (jqxhr, textStatus, error) {
       alert("fail");

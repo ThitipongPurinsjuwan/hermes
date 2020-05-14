@@ -1,6 +1,5 @@
 $(() => {
   //------------------------------------------ Document Ready --------------------------------
-  console.log(base_url("test"));
 
   $("#save_update").click(function (e) {
     e.preventDefault();
@@ -27,26 +26,52 @@ $(() => {
     $("#form_edit_guest").submit();
   });
   $("#form_edit_guest").on("submit", function (e) {
-    var parameter = $(this).serializeArray();
-    // console.log("param : "+JSON.stringify(parameter));
-    // var url = base_url("api.php/updateGuest");
+    var parameter = $("form").serializeArray();
+    var data = JSON.parse(localStorage.getItem('data'));
+
+    console.log("param : " + JSON.stringify(parameter));
     $("#btn_yes_guest").click(function (e) {
-      var url_guest = base_url("api.php/get_Allguest");
-      $.getJSON(url_guest, { format: "json" })
-        .done(function (data) {
-          // if($("#"))
-        })
-        .fail(function (jqxhr, textStatus, error) {
-          alert("fail");
-        });
 
-
-      $.post(url, parameter, function (response) {
-        if (response['message'] == "success") {
-          $("#modal_alert").modal("show");
-          setTimeout(reload, 800);
+      // check same guest
+      $.post(base_url("api.php/get_one_guest"), parameter, function (response) {
+        // if dont have guest
+        if (response.length == 0) {
+          // insert guest
+          $.post(base_url("api.php/insert_guest_reservation"), parameter, function (res) {
+            if (res['message'] != "success") {
+              alert("Error : " + res['message']);
+            }
+          });
         }
       });
+      // end check and insert
+
+      // update book_log
+      $.post(base_url("api.php/get_one_guest"), parameter, function (res) {
+        // go to update If have guest
+        res['bl_room'] = data[0].bl_room;
+        res['bl_reservation'] = data[0].bl_reservation;
+        res['ginfo_in'] = data[0].ginfo_in;
+        res['ginfo_out'] = data[0].ginfo_out;
+        res['telephone'] = parameter[findIndexInSerializeArray(parameter,"display_guest_telephone")].value;
+        res['email'] = parameter[findIndexInSerializeArray(parameter,"display_guest_email")].value;
+        $.ajax(
+          {
+            url: base_url("api.php/update_book_log_guest_reservation"),
+            type: 'post',
+            dataType: 'json',
+            success: function (feedback) {
+              if (feedback['message'] == "success") {
+                $("#modal_alert").modal("show");
+                setTimeout(reload, 800);
+              }
+            },
+            data: res
+          }
+        );
+      });
+      // end update book_log
+
       e.preventDefault();
     });
     e.preventDefault();
@@ -74,7 +99,15 @@ $(() => {
   //------------------------------------------End Document Ready --------------------------------
 });
 // Function Group 4
-
+function findIndexInSerializeArray(parameter,name){
+  var x = 0;
+  $.each(parameter, function(i, f){
+    if(f.name == name){
+      x = i;
+    }
+  });
+  return x;
+}
 // End Function Group 4
 
 

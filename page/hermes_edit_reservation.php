@@ -18,10 +18,9 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url("/assets/img/apple-icon.png")?>">
-    <link rel="icon" type="image/png" href="<?php echo base_url("/assets/img/favicon.ico")?>">
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url("assets/img/apple-icon.png")?>">
+    <link rel="icon" type="image/png" href="<?php echo base_url("assets/img/favicon.ico")?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
@@ -29,11 +28,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
-    <link href="<?php echo base_url("/assets/css/bootstrap.min.css")?>" rel="stylesheet" />
-    <link href="<?php echo base_url("/assets/css/light-bootstrap-dashboard.css?v=2.0.0")?>" rel="stylesheet" />
+    <link href="<?php echo base_url("assets/css/bootstrap.min.css")?>" rel="stylesheet" />
+    <link href="<?php echo base_url("assets/css/light-bootstrap-dashboard.css?v=2.0.0")?>" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="<?php echo base_url("/assets/css/demo.css")?>" rel="stylesheet" />
-
+    <link href="<?php echo base_url("assets/css/demo.css")?>" rel="stylesheet" />
 </head>
 
 <body>
@@ -235,7 +233,9 @@
                                         <div class="form-group">
                                             <label>First name</label>
                                             <!-- style="display:none;" -->
-                                            <input style="display:none;" type="text" name="display_id" id="display_id" class="form-control" placeholder="id">
+                                            <input style="display:none;" type="text" name="display_book_log_id" id="display_book_log_id" class="form-control" placeholder="id">
+                                            <input style="display:none;" type="text" name="display_book_log_room" id="display_book_log_room" class="form-control" placeholder="id">
+                                            <input style="display:none;" type="text" name="display_id_reservation" id="display_id_reservation" class="form-control" placeholder="id">
                                             <input style="display:none;" type="text" name="display_id_guest_contact" id="display_id_guest_contact" class="form-control" placeholder="id">
                                             <input type="text" name="display_firstname" id="display_firstname" class="form-control hide" placeholder="first name">
                                         </div>
@@ -641,15 +641,15 @@
     </div>
 </body>
 <!--   Core JS Files   -->
-<script src="<?php echo base_url("/assets/js/core/jquery.3.2.1.min.js") ?>" type="text/javascript"></script>
-<script src="<?php echo base_url("/assets/js/core/popper.min.js") ?>" type="text/javascript"></script>
-<script src="<?php echo base_url("/assets/js/core/bootstrap.min.js") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("assets/js/core/jquery.3.2.1.min.js") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("assets/js/core/popper.min.js") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("assets/js/core/bootstrap.min.js") ?>" type="text/javascript"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="<?php echo base_url("/assets/js/light-bootstrap-dashboard.js?v=2.0.0") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url("assets/js/light-bootstrap-dashboard.js?v=2.0.0") ?>" type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="<?php echo base_url("/assets/js/demo.js") ?>"></script>
+<script src="<?php echo base_url("assets/js/demo.js") ?>"></script>
 </script>
-<script src="<?php echo base_url("/application/load_hermes.js")?>"></script>
-<script src="<?php echo base_url("/application/update_reversation.js")?>"></script>
+<script src="<?php echo base_url("application/load_hermes.js")?>"></script>
+<script src="<?php echo base_url("application/update_reversation.js")?>"></script>
 
 </html>
