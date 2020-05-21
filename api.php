@@ -245,6 +245,110 @@ $app->post('/update_book_log_guest_reservation', function (Request $request, Res
     }
 });
 
+// gard 12
+$app->get('/ShowCheckin/{bl_id}', function (Request $request, Response $response, array $args) {
+    $bl_id = $args['bl_id'];
+    $sql = "SELECT * FROM book_log bl
+            join guest_info gi
+            on bl.bl_ginfo = gi.ginfo_id
+            join rooms rm
+            on bl.bl_room = rm.room_id
+            join room_type rt 
+            on rm.room_type = rt.rtype_id
+            join room_status rs
+            on bl.bl_status = rs.rstatus_id
+            join room_view rv 
+            on rm.room_view = rv.rview_id
+            join building b
+            on rm.room_building = b.building_id
+            where bl.bl_id = $bl_id";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+
+$app->post('/AddCheckinGuest', function (Request $request, Response $response, array $args) {
+    $params = $_POST;
+    print_r($params);
+    $bl_id = $params['bl_id_add'];
+    $ginfo_first_name = $params['display_firstname_checkinguest'];
+    $ginfo_last_name = $params['display_lastname_checkinguest'];
+    $ginfo_telno = $params['display_phone_checkinguest'];
+    $ginfo_passport_id = $params['display_passport_checkinguest'];
+    $ginfo_birthday = $params['display_HBD_checkinguest'];
+    $ginfo_nation = $params['display_nation_checkinguest'];
+    $ginfo_email = $params['display_email_checkinguest'];
+    $ginfo_sex = $params['display_sex_checkinguest'];
+    $bl_incbreakfast = $params['display_incbreakfast_checkinguest'];
+    $bl_breakfast = $params['display_breakfast_checkinguest'];
+    $bl_price = $params['display_price_checkinguest'];
+    try {
+        $sql = "select * from book_log bl
+                join reservation_info r
+                on bl.bl_reservation = r.resinfo_id
+                join rooms rm
+                on bl.bl_room = rm.room_id
+                join room_type rt 
+                on rm.room_type = rt.rtype_id
+                join guest_info gi
+                on bl.bl_ginfo = gi.ginfo_id
+                WHERE bl.bl_id = $bl_id";
+        $sth = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $ginfo_id = $sth['ginfo_id'];
+        $bl_reservation = $sth['bl_reservation'];
+        $bl_room = $sth['bl_room'];
+        $bl_status = $sth['bl_status'];
+        $gest_in = $sth['ginfo_in'];
+        $sql1 = "INSERT INTO guest_info(ginfo_first_name, ginfo_last_name, ginfo_passport_id, ginfo_birthday, ginfo_sex, ginfo_nation, ginfo_telno, ginfo_email, ginfo_tax_id, ginfo_name_bill)
+                VALUES ('$ginfo_first_name', '$ginfo_last_name', '$ginfo_passport_id', '$ginfo_birthday', '$ginfo_sex', '$ginfo_nation', '$ginfo_telno', '$ginfo_email', '', '')";
+        $this->db->query($sql1);
+        $sql10 = "SELECT (ginfo_out - ginfo_in)+1 as day FROM guest_info where ginfo_id = " . $sth['bl_ginfo'] . ";";
+        $sth1 = $this->db->query($sql10)->fetch(PDO::FETCH_ASSOC);
+        for ($i = 0; $i < ($sth1['day']); $i++) {
+            $sql2 = "INSERT INTO book_log (bl_reservation, bl_ginfo, bl_checkin, bl_room,bl_status, bl_price, bl_incbreakfast, bl_breakfast)
+    VALUE ('$bl_reservation', '$ginfo_id',DATE_ADD('$gest_in', INTERVAL $i DAY), '$bl_room','$bl_status', '$bl_price', '$bl_incbreakfast', '$bl_breakfast') ";
+            $this->db->query($sql2);
+        }
+        return $this->response->withJson(array('message' => 'success'));
+    } catch (PDOException $e) {
+        return $this->response->withJson(array('message' => 'false'));
+    }
+});
+
+
+// gard 19
+$app->get('/ShowCheckoutsubexpense/{ginfo_id}', function (Request $request, Response $response, array $args) {
+    $ginfo_id = $args['ginfo_id'];
+    $sql = "SELECT * from payment_log pl join guest_info g
+    on pl.pl_ginfo =g.ginfo_id
+    where g.ginfo_id = $ginfo_id";
+    $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $this->response->withJson($sth);
+});
+
+$app->post('/AddCheckoutsubexpense', function (Request $request, Response $response, array $args) {
+    $params = $_POST;
+    $ginfo_id = $params['ginfo_id'];
+    $pl_description = $params['pl_description'];
+    $pl_price = $params['pl_price'];
+    $pl_status = $params['pl_status'];
+
+    try {
+        $sql = "SELECT * from payment_log pl join guest_info g
+                on pl.pl_ginfo = g.ginfo_id
+                where g.ginfo_id = $ginfo_id";
+        $sth = $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
+        $pl_id = $sth['pl_id'];
+        $pl_ginfo = $sth['pl_ginfo'];
+        $sql1 = "INSERT INTO payment_log(pl_ginfo, pl_description, pl_price, pl_status)
+                VALUES ('$pl_ginfo', '$pl_description', '$pl_price', '$pl_status')";
+        $this->db->query($sql1);
+
+        return $this->response->withJson(array('message' => 'success'));
+    } catch (PDOException $e) {
+        return $this->response->withJson(array('message' => 'false'));
+    }
+});
+// end gard 19
 //--------------------------------------------------------[ End Code Group 4 ] ------------------------------------
 
 
@@ -404,6 +508,7 @@ $app->get('/getdb', function (Request $request, Response $response, array $args)
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
+
 
 $app->get('/getdb/{keyword}', function (Request $request, Response $response, array $args) {
     $id = $args['keyword'];

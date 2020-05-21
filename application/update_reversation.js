@@ -7,7 +7,8 @@ $(() => {
   });
   $("#form_edit_contact").on("submit", function (e) {
     var parameter = $(this).serializeArray();
-    var url = "http://localhost/hermes/api.php/updateReservation";
+    // var url = "http://localhost/hermes/api.php/updateReservation";
+    var url = base_url("api.php/updateReservation");
     $("#btn_yes").click(function (e) {
       $.post(url, parameter, function (response) {
         if (response['message'] == "success") {
@@ -178,6 +179,14 @@ function reload() {
 }
 function redirect() {
   window.location.replace(base_url("page/"));
+}
+function base_url(path){
+  var host = window.location.origin;
+  // "http://localhost"
+  var pathArray = window.location.pathname.split( '/' );
+  // split path
+  return host+"/"+pathArray[1]+"/"+path;
+  // return http://localhost/hermes/+path
 }
 
 //--------------------------------------------------------[ End Function Public ] ------------------------------------

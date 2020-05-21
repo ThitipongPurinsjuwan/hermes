@@ -25,7 +25,7 @@ $(() => {
     var query = window.location.search.substring(1);
     var vars = query.split("=");
     var ID = vars[1];
-    var urlAPI = "http://localhost/hermes/api.php/addroom/" + ID;
+    var urlAPI = base_url("api.php/addroom/"+ ID);
     $.getJSON(urlAPI, {
       format: "json",
     })
@@ -48,7 +48,8 @@ $(() => {
     $("#save_form").on("submit", function (e) {
       var parameter = $(this).serializeArray();
       console.log("para : " + JSON.stringify(parameter));
-      var url = "http://localhost/hermes/api.php/saveadd";
+      // var url = "http://localhost/hermes/api.php/saveadd";
+      var url = base_url("api.php/saveadd");
       $.post(url, parameter, function (response) {
         if (response["message"] == "success") {
           $("#modal_alert").modal("show");
@@ -140,7 +141,7 @@ function getjson(url) {
     });
 }
 function show_agency(agency_id) {
-  var urlAPI = "http://localhost/hermes/api.php/get_agency";
+  var urlAPI = base_url("api.php/get_agency");
   $.getJSON(urlAPI, {
     format: "json",
   })
@@ -214,7 +215,8 @@ function showRoom() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var urlAPI = "http://localhost/hermes/api.php/room/" + ID;
+  // var urlAPI = "http://localhost/hermes/api.php/room/" + ID;
+  var urlAPI = base_url("api.php/room/"+ ID);
   $.getJSON(urlAPI, {
     format: "json",
   })
@@ -239,7 +241,8 @@ function showRoom() {
 function showNewRoom() {
   night = $("#Night").text();
   var idcheck = $("#select2").val();
-  var urlAPI = "http://localhost/hermes/api.php/getNewRoom/" + idcheck;
+  // var urlAPI = "http://localhost/hermes/api.php/getNewRoom/" + idcheck;
+  var urlAPI = base_url("api.php/getNewRoom/"+ idcheck);
   $.getJSON(urlAPI, { format: "json" })
     .done(function (data) {
       $("#Roomnew").text(data["0"]["room_name"]);
@@ -257,7 +260,8 @@ function selectionLoad() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var urlAPI = "http://localhost/hermes/api.php/room/" + ID;
+  // var urlAPI = "http://localhost/hermes/api.php/room/" + ID;
+  var urlAPI = base_url("api.php/room/"+ ID);
   $.getJSON(urlAPI, {
     format: "json"
   })
@@ -275,7 +279,8 @@ function selectionLoad() {
     })
 }
 function saveRoom() {
-  var url = "http://localhost/hermes/api.php/updateRoom";
+  // var url = "http://localhost/hermes/api.php/updateRoom";
+  var url = base_url("api.php/updateRoom");
   var data2 = new Object();
   data2.ginfo_id = parseInt($("#display_guest_id").val());
   data2.gCheckIn = $("#display_check_in").val().trim();
@@ -291,7 +296,8 @@ function saveRoom() {
   });
 };
 function guest_room_name(room_id) {
-  var url = "http://localhost/hermes/api.php/Show_detail_room_guest/" + room_id;
+  // var url = "http://localhost/hermes/api.php/Show_detail_room_guest/" + room_id;
+  var url = base_url("api.php/Show_detail_room_guest/"+ room_id);
   $.getJSON(url, { format: "json" })
     .done(function (data) {
       $("#Room").text(data[0]["room_name"]);

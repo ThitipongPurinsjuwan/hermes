@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
     <link href="<?php echo base_url("assets/css/bootstrap.min.css") ?>" rel="stylesheet" />
-    <link href="<?php echo base_url("assets/css/light-bootstrap-dashboard.css?v=2.0.0")?> " rel="stylesheet" />
+    <link href="<?php echo base_url("assets/css/light-bootstrap-dashboard.css?v=2.0.0")?>" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="<?php echo base_url("assets/css/demo.css")?>" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
