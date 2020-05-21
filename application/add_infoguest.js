@@ -8,7 +8,7 @@ function ShowCheckin() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var url = "http://localhost/hermes/api.php/ShowCheckin/" + ID;
+  var url = "http://localhost/hermes/api.php/ShowCheckinGuest/" + ID;
   // input test
 
   // gard 12

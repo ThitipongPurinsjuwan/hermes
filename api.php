@@ -153,7 +153,7 @@ $app->get('/DisplayRoom/{id}', function (Request $request, Response $response, a
 
 
 // gard 12
-$app->get('/ShowCheckin/{bl_id}', function (Request $request, Response $response, array $args) {
+$app->get('/ShowCheckinGuest/{bl_id}', function (Request $request, Response $response, array $args) {
     $bl_id = $args['bl_id'];
     $sql = "SELECT * FROM book_log bl
             join guest_info gi
@@ -228,37 +228,37 @@ $app->post('/AddCheckinGuest', function (Request $request, Response $response, a
 // end gard 12
 
 // gard 19
-$app->get('/ShowPayment/{ginfo_id}', function (Request $request, Response $response, array $args) {
+$app->get('/ShowCheckoutsubexpense/{ginfo_id}', function (Request $request, Response $response, array $args) {
     $ginfo_id = $args['ginfo_id'];
-    $sql = "SELECT * from payment_log pl join guest_info gi
-    on pl.pl_ginfo =gi.ginfo_id
-    where gi.ginfo_id = $ginfo_id";
+    $sql = "SELECT * from payment_log pl join guest_info g
+    on pl.pl_ginfo =g.ginfo_id
+    where g.ginfo_id = $ginfo_id";
     $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     return $this->response->withJson($sth);
 });
 
-$app->post('/AddPayment', function (Request $request, Response $response, array $args) {
+$app->post('/AddCheckoutsubexpense', function (Request $request, Response $response, array $args) {
     $params = $_POST;
     // echo ("<pre>");
     // print_r($params);
     // print_r($_POST);
     // echo ("<pre>");
     // exit;
-    $pl_ginfo = $params['getid'];
+    $ginfo_id = $params['ginfo_id'];
     // $pl_datetimes = $params['display_pl_datetimes'];
-    $pl_description = $params['display_pl_description'];
-    $pl_price = $params['display_pl_price'];
-    $pl_status = $params['display_pl_status'];
-
+    $pl_description = $params['pl_description'];
+    $pl_price = $params['pl_price'];
+    $pl_status = $params['pl_status'];
 
     try {
-        $sql = "SELECT * from payment_log pl join guest_info gi
-                on pl.pl_ginfo =gi.ginfo_id
-                where gi.ginfo_id = $ginfo_id";
+        $sql = "SELECT * from payment_log pl join guest_info g
+                on pl.pl_ginfo = g.ginfo_id
+                where g.ginfo_id = $ginfo_id";
         $sth = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         $pl_id = $sth['pl_id'];
-        $sql1 = "INSERT INTO payment_log(pl_description, pl_price, pl_status, pl_ginfo)
-                VALUES ('$pl_description', '$pl_price', '$pl_status', '$pl_ginfo')
+        $pl_ginfo = $sth['pl_ginfo'];
+        $sql1 = "INSERT INTO payment_log(pl_ginfo, pl_description, pl_price, pl_status)
+                VALUES ('$pl_ginfo', '$pl_description', '$pl_price', '$pl_status')
                 WHERE pl_id = $pl_id";
         $this->db->query($sql1);
 

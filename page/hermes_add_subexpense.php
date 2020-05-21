@@ -1,11 +1,12 @@
+<?php include "../function.php" ?>
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="76x76" href=<?php echo base_url("/assets/img/apple-icon.png") ?> />
+    <link rel="icon" type="image/png" href=<?php echo base_url("/assets/img/favicon.ico")  ?> />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim
@@ -15,25 +16,26 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
+    <link href=<?php echo base_url("/assets/css/bootstrap.min.css") ?> rel="stylesheet" />
+    <link href=<?php echo base_url("/assets/css/light-bootstrap-dashboard.css?v=2.0.0 ") ?> rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="../assets/css/demo.css" rel="stylesheet" />
-    <script src="../assets/js/jquery-3.5.0.min.js"></script>
-    <script src="../application/add_reservations.js"></script>
-    <script src="../application/x_button.js"></script>
+    <link href=<?php echo base_url("/assets/css/demo.css") ?> rel="stylesheet" />
+
+    <link href=<?php echo base_url("/assets/DataTables-1.10.20/media/css/jquery.dataTables.css") ?> rel="stylesheet" />
+    <script src=<?php echo base_url("/js/jquery-3.5.0.min.js") ?>></script>
+
 </head>
 
 <body>
 
     <body>
         <div class="wrapper">
-            <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+            <div class="sidebar" data-image=<?php echo base_url("/assets/img/sidebar-5.jpg") ?>>
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="http://www.creative-tim.com" class="simple-text">
-              Creative Tim
-            </a>
+                            Creative Tim
+                        </a>
                     </div>
                     <ul class="nav">
                         <li class="nav-item active">
@@ -87,11 +89,12 @@
                     </ul>
                 </div>
             </div>
+
             <div class="main-panel">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg" color-on-scroll="500">
                     <div class="container-fluid">
-                        <a class="navbar-brand" href="#pablo"> Dashboard </a>
+                        <a class="navbar-brand" href="#pablo"> Check Out </a>
                         <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-bar burger-lines"></span>
                             <span class="navbar-toggler-bar burger-lines"></span>
@@ -155,32 +158,106 @@
                     </div>
                 </nav>
                 <!-- End Navbar -->
-                
-                <!-- start add infoguest check-in  -->
-                <div class="content">
-                    <form id="form_add_checkinguest" method="POST">
-                        <div class="card">
-                            <div class="fixposition">
-                                <strong>Stay date : </strong><span id="display_checkin"></span><strong> to </strong><span id="display_checkout"></span>
-                                <strong>Book Date : </strong><span id="display_bookdate"></span>
-                                <strong>By : </strong><span id="display_firstname"></span>
-                                <strong>Agency : </strong><span id="display_lastname"></span>
-                                <strong>Phone : </strong><span id="display_phone"></span><br>
-                                <strong>Room : </strong><span id="display_room"></span>
-                                <strong>Type : </strong><span id="display_type"></span>
-                                <strong>Building : </strong><span id="display_building"></span>
-                                <strong>Views : </strong><span id="display_views"></span>
-                            </div>
 
-                            
-                            <div class="card-head">
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <h3 class="mt-4 fixposition"> Add more guest in this room <span class="fname"></span> <span class="lname"></span></h3>
+
+                <div class="content">
+                    <div class="card">
+                        <div class="card-head">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 class="mt-4 fixposition"> Payments </h3>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <!-- <div class="col-md-1 mr-2">
+                                            <label class="">Show</label>
+                                        </div>
+                                        <div class="col-md-1.5 pr-2">
+                                            <select class="custom-select" id=" ">
+                                                <option selected>10</option>
+                                                <option value="1">11</option>
+                                                <option value="2">12</option>
+                                                <option value="3">13</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2 pl-0 ml-2">
+                                            <label class="mr-sm-2">ertries</label>
+                                        </div>
+                                        <div class="col-md-1 mr-2">
+                                            <label class="mr-sm-2">Search</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="search" class="form-control">
+                                        </div> -->
                                     </div>
-                                    <div class="col-md-2 mt-3">
-                                        <button type="submit" data-toggle="modal" id="savecheckinguest" data-target="#exampleModal" class="btn btn-primary btn-round ">Save</button>
+
+                                    <div class="row ml-2">
+                                        <table class="table" id="display">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col"></th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Item</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Payment</th>
+                                                </tr>
+                                            </thead>
+                                            <input type="text" name="ginfo_id" id="ginfo_id" style="display:none;">
+
+                                            <tbody id="detail">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+
+                                    <form id="insert_db" method="post">
+
+                                        <!-- <div class="row justify-content-center mt-3">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-secondary">Previous</button>
+                                                <button type="button" class="btn btn-primary">1</button>
+                                                <button type="button" class="btn btn-secondary">Next</button>
+                                            </div>
+                                        </div> -->
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label class="mr-sm-2">Item</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="pl_description" name="pl_description">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label class="mr-sm-2">Price</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="pl_price" name="pl_price">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label class="mr-sm-2">Payments</label>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <select class="custom-select form-control" id="pl_status" name="pl_status">
+                                                <option selected>--------</option>
+                                                <option value="1">paid</option>
+                                                <option value="2">free</option>
+                                                <option value="3">bill to room</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center mt-3">
+                                        <button id="save_payment" type="submit" class="btn btn-primary ">Save</button>
                                         <!-- Button trigger modal -->
                                         <!-- Modal -->
                                         <!-- ALERT ARE YOU SURE? -->
@@ -188,7 +265,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">ADD GUEST INFORMATION
+                                                        <h5 class="modal-title" id="exampleModalLabel">ADD SUb EXPENSE INFORMATION
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
@@ -199,7 +276,7 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_yes_add_checkin">Save
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_yes_add_checkout">Save
                                                             changes</button>
                                                     </div>
                                                 </div>
@@ -213,92 +290,18 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" id="" class="btn btn-info btn-round ">Cancel</button>
-                                        <input type="text" name="bl_id_add" id="bl_id_add" style="display:none;">
                                     </div>
                                 </div>
-                                <hr>
-                            </div>
-
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="">First Name : </label>
-                                        <input type="text" class="form-control" name="display_firstname_checkinguest " id="display_firstname_checkinguest " />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Last Name : </label>
-                                        <input type="text" class="form-control" name="display_lastname_checkinguest " id="display_lastname_checkinguest " />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Phone : </label>
-                                        <input type="text" class="form-control" name="display_phone_checkinguest " id="display_phone_checkinguest " />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Passport ID : </label>
-                                        <input type="text" class="form-control" name="display_passport_checkinguest " id="display_passport_checkinguest "  />
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-
-                                        <label for="">Birthday (YYYY-MM-DD) : </label>
-
-                                        <input type="date" class="form-control" id="bd_edit_infoguest" name="bd_edit_infoguest" />
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Nationality : </label>
-                                        <select class="custom-select form-control" name="display_nation_checkinguest" id="display_nation_checkinguest">
-                                            <option selected>N/A</option>
-                                            <option value="1">thai</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">E-mail : </label>
-                                        <input type="text" class="form-control" name="display_email_checkinguest " id="display_email_checkinguest " />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Sex : </label>
-                                        <select class="custom-select form-control" name="display_sex_checkinguest " id="display_sex_checkinguest ">
-                                            <option selected>N/A</option>
-                                            <option value="1">male</option>
-                                            <option value="2">female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="">Including Breakfast : </label>
-                                        <select class="custom-select form-control" name="display_incbreakfast_checkinguest " id="display_incbreakfast_checkinguest ">
-                                            <option selected>No</option>
-                                            <option value="1">0</option>
-                                            <option value="2">1</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Breakfast </label>
-                                        <select class="custom-select form-control" name="display_breakfast_checkinguest " id="display_breakfast_checkinguest ">
-                                            <option selected>N/A</option>
-                                            <option value="1">set 1</option>
-                                            <option value="2">set 2</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="">Room Price : </label>
-                                        <input type="text" class="form-control" name="display_price_checkinguest " id="display_price_checkinguest " />
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <!-- end add infoguest check-in  -->
+        </div>
+        </div>
 
-            <footer class="footer">
+        <footer class="footer">
             <div class="container-fluid">
                 <nav>
                     <ul class="footer-menu">
@@ -324,7 +327,7 @@
                     </p>
                 </nav>
             </div>
-            </footer>
+        </footer>
         </div>
     </body>
 
@@ -334,15 +337,24 @@
         }
     </style>
     <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
-    <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src=<?php echo base_url("/assets/js/core/popper.min.js") ?> type="text/javascript"></script>
+    <script src=<?php echo base_url("/assets/js/core/bootstrap.min.js") ?> type="text/javascript"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-    <script src="../assets/js/plugins/bootstrap-switch.js"></script>
+    <script src=<?php echo base_url("/assets/js/plugins/bootstrap-switch.js") ?>></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!--  Chartist Plugin  -->
+    <script src=<?php echo base_url("/assets/js/plugins/chartist.min.js") ?>></script>
+    <!--  Notifications Plugin    -->
+    <script src=<?php echo base_url("/assets/js/plugins/bootstrap-notify.js") ?>></script>
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-    <script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
+    <script src=<?php echo base_url("/assets/js/light-bootstrap-dashboard.js?v=2.0.0 ") ?> type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-    <script src="../assets/js/demo.js"></script>
-    <script src="../application/add_infoguest.js"></script>
+    <script src=<?php echo base_url("/assets/js/demo.js") ?>></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src=<?php echo base_url("/assets/DataTables-1.10.20/media/js/jquery.dataTables.min.js") ?>></script>
+    <script src=<?php echo base_url("/application/add_subexpense.js") ?>></script>
+
 
 </html>
