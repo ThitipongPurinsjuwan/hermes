@@ -10,7 +10,9 @@ $(() => {
     // var url = "http://localhost/hermes/api.php/updateReservation";
     var url = base_url("api.php/updateReservation");
     $("#btn_yes").click(function (e) {
+      
       $.post(url, parameter, function (response) {
+        console.log(response);
         if (response['message'] == "success") {
           $('#modal_alert').modal('show');
           setTimeout(reload, 800);
@@ -32,11 +34,13 @@ $(() => {
 
     console.log("param : " + JSON.stringify(parameter));
     $("#btn_yes_guest").click(function (e) {
+      var url = base_url("api.php/get_one_guest");
 
       // check same guest
-      $.post(base_url("api.php/get_one_guest"), parameter, function (response) {
+      $.post(url, parameter, function (response) {
+
         // if dont have guest
-        if (response.length == 0) {
+        if (!response) {
           // insert guest
           $.post(base_url("api.php/insert_guest_reservation"), parameter, function (res) {
             if (res['message'] != "success") {
@@ -56,6 +60,7 @@ $(() => {
         res['ginfo_out'] = data[0].ginfo_out;
         res['telephone'] = parameter[findIndexInSerializeArray(parameter,"display_guest_telephone")].value;
         res['email'] = parameter[findIndexInSerializeArray(parameter,"display_guest_email")].value;
+        console.log(res);
         $.ajax(
           {
             url: base_url("api.php/update_book_log_guest_reservation"),

@@ -1,43 +1,27 @@
-<!--
-=========================================================
- Light Bootstrap Dashboard - v2.0.1
-=========================================================
-
- Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim
-
-=========================================================
-
- The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
-<?php include "../function.php" ?>
+<?php include('../function.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url("/assets/img/apple-icon.png") ?>">
-  <link rel="icon" type="image/png" href="<?php echo base_url("/assets/img/favicon.ico") ?>">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative
-    Tim
-  </title>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport" />
+<meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url("assets/img/apple-icon.png") ?>">
+    <link rel="icon" type="image/png" href="<?php echo base_url("assets/img/favicon.ico") ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Light Bootstrap Dashboard - Free Bootstrap 4 Admin Dashboard by Creative Tim</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+    name="viewport" />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
   <!-- CSS Files -->
-  <link href="<?php echo base_url("/assets/css/bootstrap.min.css") ?>" rel="stylesheet" />
-  <link href="<?php echo base_url("/assets/css/light-bootstrap-dashboard.css?v=2.0.0") ?> " rel="stylesheet" />
+  <link href="<?php echo base_url("assets/css/bootstrap.min.css")?>" rel="stylesheet" />
+  <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="<?php echo base_url("/assets/css/demo.css") ?>" rel="stylesheet" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=your_api_key_here"></script>
-  <script src="https://maps.googleapis.com/maps/api/js"></script>
-
+  <link href="<?php echo base_url("assets/css/demo.css")?>" rel="stylesheet" />
+  <script src="<?php echo base_url("js/jquery-3.5.0.min.js")?>"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+  <script src="<?php echo base_url("application/jquery1.js")?>"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
   <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
@@ -45,7 +29,7 @@
 
 <body>
   <div class="wrapper">
-    <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+    <div class="sidebar" data-image="<?php echo base_url("assets/img/sidebar-5.jpg")?>">
       <!--
          Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
  
@@ -114,7 +98,8 @@
       <nav class="navbar navbar-expand-lg" color-on-scroll="500">
         <div class="container-fluid">
           <a class="navbar-brand" href="#pablo"> Table List </a>
-          <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
             <span class="navbar-toggler-bar burger-lines"></span>
@@ -155,7 +140,8 @@
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <span class="no-icon">Dropdown</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -188,48 +174,50 @@
                       <div class="col-md-12">
                         <nav>
                           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-start-tab" data-toggle="tab" href="#nav-start" role="tab" aria-controls="nav-start" aria-selected="true">Start</a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact information</a>
-                            <a class="nav-item nav-link" id="nav-guest-tab" data-toggle="tab" href="#nav-guest" role="tab" aria-controls="nav-guest" aria-selected="false">Guset information</a>
-                            <a class="nav-item nav-link" id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab" aria-controls="nav-summary" aria-selected="false">Summary</a>
+                            <a class="nav-item nav-link active" id="nav-start-tab" data-toggle="tab" href="#nav-start"
+                              role="tab" aria-controls="nav-start" aria-selected="true">Start</a>
+                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+                              role="tab" aria-controls="nav-contact" aria-selected="false">Contact information</a>
+                            <a class="nav-item nav-link" id="nav-guest-tab" data-toggle="tab" href="#nav-guest"
+                              role="tab" aria-controls="nav-guest" aria-selected="false">Guset information</a>
+                            <a class="nav-item nav-link" id="nav-summary-tab" data-toggle="tab" href="#nav-summary"
+                              role="tab" aria-controls="nav-summary" aria-selected="false">Summary</a>
                           </div>
                         </nav>
                         <!--start-->
                         <div class="tab-content" id="nav-tabContent">
-                          <div class="tab-pane fade show active" id="nav-start" role="tabpanel" aria-labelledby="nav-start-tab">
+                          <div class="tab-pane fade show active" id="nav-start" role="tabpanel"
+                            aria-labelledby="nav-start-tab">
                             <div class="row">
                               <div class="col">
-                                <div class="row m-3">
-                                  <div class="col-md-4">
-                                    <form id="pai" method="GET">
-
-                                      <p>
-                                        Date checkin:
-                                        <input class="form-control" type="text" name="datein" value="" id="datein" />
-                                        <script>
-                                          $("input[id$=datein]").datepicker({
-                                            dateFormat: "yy-mm-dd",
-                                            minDate: 0,
-                                          });
-                                        </script>
-                                      </p>
-                                  </div>
-                                  <div class="col-md-4">
-
-                                    <p>
-                                      Date checkout:
-                                      <input class="form-control" type="text" name="dateout" value="" id="dateout" />
-                                      <script>
-                                        $("input[id$=dateout]").datepicker({
-                                          dateFormat: "yy-mm-dd",
-                                          minDate: 0,
-
-                                        });
-                                      </script>
-                                    </p>
-                                    </form>
-                                  </div>
-                                </div>
+                                <form id="pai" method="GET">
+                                  <br />
+                                  <br />
+                                  <p>
+                                    Date checkin:
+                                    <input type="text" name="datein" value="" id="datein" />
+                                    <script>
+                                      $("input[id$=datein]").datepicker({
+                                       dateFormat: "yy-mm-dd",
+                                       minDate: 0,
+                                     });
+                                     </script>
+                                  </p>
+                                 
+                                  <br />
+                                  <p>
+                                    Date checkout:
+                                    <input type="text" name="dateout" value="" id="dateout" />
+                                    <script>
+                                      $("input[id$=dateout]").datepicker({
+                                        dateFormat: "yy-mm-dd",
+                                        minDate: 0,
+  
+                                      });
+                                    </script> 
+                                  </p>
+                                  
+                                </form>
                               </div>
                             </div>
                             <div class="row">
@@ -332,7 +320,8 @@
                                   <tr>
                                     <td>Last name:</td>
                                     <td>
-                                      <br /><input type="text" name="lastname" id="glname" value="" class="form-control" />
+                                      <br /><input type="text" name="lastname" id="glname" value=""
+                                        class="form-control" />
                                     </td>
                                   </tr>
                                 </div>
@@ -342,7 +331,8 @@
                                   <tr>
                                     <td>Phone:</td>
                                     <td>
-                                      <br /><input type="text" name="phoneg" id="gphone" value="" class="form-control" />
+                                      <br /><input type="text" name="phoneg" id="gphone" value=""
+                                        class="form-control" />
                                     </td>
                                   </tr>
                                 </div>
@@ -407,7 +397,7 @@
                                     </div>
                                     <div class="row">
                                       <div class="col">
-                                        <p> bookdate time :</p>
+                                        <p > bookdate time :</p>
                                       </div>
                                       <div class="col">
                                         <p id="booktime"></p>
@@ -500,7 +490,7 @@
                                           <td class="text-nowrap" id="priceroomt2"></td>
                                           <td class="text-nowrap" id="bf_r2"></td>
                                         </tr>
-                                        <tr id="show3">
+                                         <tr id="show3">
                                           <td class="text-nowrap" id="nameroomt3"></td>
                                           <td class="text-nowrap" id="name_r3">
 
@@ -508,8 +498,8 @@
                                           <td class="text-nowrap" id="phone_r3"></td>
                                           <td class="text-nowrap" id="priceroomt3"></td>
                                           <td class="text-nowrap" id="bf_r3"></td>
-                                        </tr>
-                                        <tr id="show4">
+                                        </tr> 
+                                         <tr id="show4">
                                           <td class="text-nowrap" id="nameroomt4"></td>
                                           <td class="text-nowrap" id="name_r4">
 
@@ -535,7 +525,7 @@
                                           <td class="text-nowrap" id="phone_r6"></td>
                                           <td class="text-nowrap" id="priceroomt6"></td>
                                           <td class="text-nowrap" id="bf_r6"></td>
-                                        </tr>
+                                        </tr> 
                                       </tbody>
                                     </table>
                                   </div>
@@ -582,7 +572,7 @@
                                     </div>
                                   </div>
                                   <div class="col">
-                                    <button type="button" class="btn btn-primary btn-block btn-round" onclick="location.href='index.php'" id="btn_confirm">
+                                    <button type="button" class="btn btn-primary btn-block" onclick="location.href='<?php echo base_url('page/index.php')?>'" id="btn_confirm">
                                       Confirm
                                     </button>
                                   </div>
@@ -643,21 +633,20 @@
   </div>
 </body>
 <!--   Core JS Files   -->
-<script src="<?php echo base_url("/assets/js/core/jquery.3.2.1.min.js")?>" type="text/javascript"></script>
-<script src="<?php echo base_url("/assets/js/core/popper.min.js") ?>" type="text/javascript"></script>
-<script src="<?php echo base_url("/assets/js/core/bootstrap.min.js") ?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/core/jquery.3.2.1.min.js')?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/core/popper.min.js')?>" type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/core/bootstrap.min.js')?>" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-  <script src="<?php echo base_url("/assets/js/plugins/bootstrap-switch.js") ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/bootstrap-switch.js')?>"></script>
 <!--  Google Maps Plugin    -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <!--  Chartist Plugin  -->
-<script src="<?php echo base_url("/assets/js/plugins/chartist.min.js") ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/chartist.min.js')?>"></script>
 <!--  Notifications Plugin    -->
-<script src="<?php echo base_url("/assets/js/plugins/bootstrap-notify.js") ?>"></script>
+<script src="<?php echo base_url('assets/js/plugins/bootstrap-notify.js')?>"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-<script src="<?php echo base_url("/assets/js/light-bootstrap-dashboard.js?v=2.0.0") ?> " type="text/javascript"></script>
+<script src="<?php echo base_url('assets/js/light-bootstrap-dashboard.js?v=2.0.0')?> " type="text/javascript"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
-<script src="<?php echo base_url("/assets/js/demo.js")?>"></script>
-<script src="<?php echo base_url("/application/jquery1.js")?>"></script>
+<script src="<?php echo base_url('assets/js/demo.js')?>"></script>
 
 </html>

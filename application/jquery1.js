@@ -15,16 +15,13 @@ $(() => {
   $("#show5").hide();
   $("#show6").hide();
   $("#info").click(function (e) {
-
     // e.preventDefault();
     $("#infoid").submit();
-    // window.location.href = "http://localhost/hermes/page/hermes_edit_reservation.html?id="+$("#id").val();
   });
-
 });
 
 function display() {
-  var urlAPI = "http://localhost/hermes/api.php/getdb";
+  var urlAPI = base_url("api.php/getdb");
   $.getJSON(urlAPI).done(function (data) {
     // console.log(JSON.stringify(data));
 
@@ -56,10 +53,12 @@ function display() {
 
 function btnSearch_Click() {
   var idcheck = $("#keyword").val();
-  var urlAPI = "http://localhost/hermes/api.php/getdb/" + idcheck;
+  var urlAPI = base_url("api.php/getdb/" + idcheck);
   $.getJSON(urlAPI).done(function (data) {
+    // console.log(JSON.stringify(data));
     var line = "";
     $.each(data, function (k, item) {
+      // console.log(item);
       line += "<tr>";
       line +=
         "<td class=" +
@@ -86,7 +85,9 @@ function btnSearch_Click() {
 function displayroomva() {
   var chechiddate = $("#datein").val();
   var chechoutdate = $("#dateout").val();
-  var urlAPI = `http://localhost/hermes/api.php/getroomva/${chechiddate}/${chechoutdate}`;
+  var urlAPI = base_url(
+    "api.php/getroomval/" + chechiddate + "/" + chechoutdate
+  );
   $.getJSON(urlAPI).done(function (data) {
     console.log(data);
     var line = "";
@@ -114,23 +115,29 @@ function displayroomva() {
 
 $(document).ready(function () {
   $("#nav-guest-tab").click(function () {
+    // var checkin = $("#datein").val();
+    // var checkout = $("#dateout").val();
     localStorage.clear();
     var list = [];
     $("input:checkbox:checked").each(function () {
       list.push($(this).attr("id"));
     });
     roommm = list[0];
-    var urlAPI =
-      "http://localhost/hermes/api.php/getroomva/" + roommm;
+    var urlAPI = base_url("api.php/getroomva/" + roommm);
     $.getJSON(urlAPI, { format: "json" }).done(function (data) {
       console.log(data);
       $("#groom").val(data["0"]["room_price"]);
       $("#total").val(data["0"]["room_price"]);
     });
     $("#bf").val("0.00");
+    // var total = $("#groom").text();
+    // $("#total").val(total);
+    // var agency = $("#agency").val();
+
     var first = $("#firstname").val();
     var last = $("#lastname").val();
     var phone = $("#phone").val();
+    // var email = $("#email").val();
     $("#gfname").val(first);
     $("#glname").val(last);
     $("#gphone").val(phone);
@@ -150,13 +157,13 @@ $(document).ready(function () {
 $(document).ready(function () {
   $("#nav-summary-tab").click(function () {
     myFunction();
-    var urlAPI = "http://localhost/hermes/api.php/maxGU";
+    var urlAPI = base_url("api.php/maxGU");
     $.getJSON(urlAPI, { format: "json" }).done(function (data) {
       maxGU = data[0]["ginfo_id"];
       maxGU = parseInt(maxGU) + 1;
       localStorage.setItem("maxGU", maxGU);
     });
-    var urlAPI = "http://localhost/hermes/api.php/maxRE";
+    var urlAPI = base_url("api.php/maxRE");
     $.getJSON(urlAPI, { format: "json" }).done(function (data) {
       maxRE = data[0]["resinfo_id"];
       maxRE = parseInt(maxRE) + 1;
@@ -183,6 +190,7 @@ $(document).ready(function () {
     });
     var ll = list.length;
     for (var i = 0; i < list.length; i++) {
+      // roommab = list[i];
       $("#name_r" + i).text(first);
       $("#phone_r" + i).text(phone);
       $("#bf_r" + i).text(bff);
@@ -195,18 +203,30 @@ $(document).ready(function () {
     $("#chin").text(checkin);
     $("#chout").text(checkout);
     $("#c").text(first);
+    // $("#name_r").text(first);
+    // $("#phone_r").text(phone);
     $("#ph").text(phone);
     $("#e").text(email);
-    var urlAPI =
-      "http://localhost/hermes/api.php/getagency/" + agency;
+    // $("#a").text(agency);
+    // $("#bf_r").text(bf);
+    // var roomm = $("input[type='checkbox']:checked").val();
+    // var urlAPI =
+    //   "api.php/getroomva/" + roomm;
+    // $.getJSON(urlAPI, { format: "json" }).done(function (data) {
+    //   console.log(data);
+    //   $("#nameroomt").text(data["0"]["room_name"]);
+    //   $("#priceroomt").text(data["0"]["room_price"]);
+    // });
+    var urlAPI = base_url("api.php/getagency/" + agency);
     $.getJSON(urlAPI, { format: "json" }).done(function (data) {
+      console.log(data);
       $("#a").text(data["0"]["agency_name"]);
     });
   });
 });
 
 function confirmRE() {
-  var night = $("#night").text();
+  var night = parseInt($("#night").text());
   var code = $("#code").val();
   var first = $("#firstname").val();
   var last = $("#lastname").val();
@@ -218,7 +238,7 @@ function confirmRE() {
   var price = $("#ttal").text();
   var bf = $("#inputState").val();
   var room = $("input[type='checkbox']:checked").val();
-  var urlAPI = "http://localhost/hermes/api.php/saveRE/";
+  var urlAPI = base_url("api.php/saveRE/");
   $.ajax({
     type: "GET",
     url:
@@ -246,6 +266,7 @@ function confirmRE() {
       room,
     dataType: "dataType",
     success: function (rerult, status, xhr) {
+      alert("ok");
     },
   });
   var list = [];
@@ -254,36 +275,62 @@ function confirmRE() {
   });
   var maxRE = localStorage.getItem("maxRE");
   var maxGU = localStorage.getItem("maxGU");
-  alert(maxRE);
-  alert(maxGU);
-  for (let i = 0; i <= night; i++) {
-    for (let j = 0; j < list.length; j++) {
-      var urlAPI = "http://localhost/hermes/api.php/savebook/";
-      $.ajax({
-        type: "GET",
-        url:
-          urlAPI +
-          maxRE +
-          "/" +
-          maxGU +
-          "/" +
-          checkin +
-          "/" +
-          list[j] +
-          "/" +
-          price +
-          "/" +
-          bf,
-        dataType: "dataType",
-        success: function (rerult, status, xhr) {
-        },
-      });
-    }
-  }
+  var url = base_url("api.php/savebook");
+  var data = new Object();
+  data.maxGU = maxGU;
+  data.maxRE = maxRE;
+  data.checkin = checkin;
+  data.price = price;
+  data.bf = bf;
+  data.list = list;
+  data.night = night;
+  $.ajax({
+    url: url,
+    type: "post",
+    dataType: "json",
+    success: function (feedback) {
+      if (feedback.nrow > 0) {
+        var data = feedback.data[0];
+        $("#menu_id").text(data.menu_id);
+        $("#menu_name").val(data.menu_name);
+        $("#menu_type option[value='" + data.menu_type + "']").prop(
+          "selected",
+          true
+        );
+        $("#menu_price").val(data.menu_price);
+      } else {
+        alert("Not found");
+      }
+    },
+    data: data,
+  });
+  // for (let i = 0; i < night; i++) {
+  //   for (let j = 0; j <= list.length; j++) {
+  //     var urlAPI = "api.php/savebook/";
+  //     $.ajax({
+  //       type: "GET",
+  //       url:
+  //         urlAPI +
+  //         maxRE +
+  //         "/" +
+  //         maxGU +
+  //         "/" +
+  //         checkin +
+  //         "/" +
+  //         list[j] +
+  //         "/" +
+  //         price +
+  //         "/" +
+  //         bf,
+  //       dataType: "dataType",
+  //       success: function (rerult, status, xhr) {},
+  //     });
+  //   }
+  // }
 }
 function roomlist(list, i) {
   $("#show" + i).show();
-  var urlAPI = "http://localhost/hermes/api.php/getroomva/" + list;
+  var urlAPI = base_url("api.php/getroomva/" + list);
   $.getJSON(urlAPI, { format: "json" }).done(function (data) {
     $("#nameroomt" + i).text(data["0"]["room_name"]);
     $("#priceroomt" + i).text(data["0"]["room_price"]);
@@ -311,7 +358,19 @@ function gencode() {
 
 function getnight(checkin, checkout) {
   var cin = checkin.split("-");
+  // var chh = "";
+  // chh += cin[0];
+  // chh += cin[1];
+  // chh += cin[2];
+  // chhh = parseInt(chh) % 100;
   var bin = checkout.split("-");
+  // var bhh = "";
+  // bhh += bin[0];
+  // bhh += bin[1];
+  // bhh += bin[2];
+  // bhhh = parseInt(bhh) % 100;
+  // night = bhhh - chhh;
+  // return night;
   sDate = new Date(cin[0], cin[1] - 1, cin[2]);
   eDate = new Date(bin[0], bin[1] - 1, bin[2]);
   var daysDiff = Math.round((eDate - sDate) / 86400000);
@@ -328,4 +387,16 @@ function myFunction() {
   s = n.getSeconds();
   document.getElementById("booktime").innerHTML =
     m + "/" + d + "/" + y + " " + h + ":" + u + ":" + s;
+}
+function reload() {
+  location.reload();
+}
+
+function base_url(path) {
+  var host = window.location.origin;
+  // "http://localhost"
+  var pathArray = window.location.pathname.split("/");
+  // split path
+  return host + "/" + pathArray[1] + "/" + path;
+  // return http://localhost/hermes/+path
 }
