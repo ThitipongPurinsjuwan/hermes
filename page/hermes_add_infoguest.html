@@ -158,31 +158,30 @@
                 
                 <!-- start add infoguest check-in  -->
                 <div class="content">
-                    <div class="card">
-                        <div class="fixposition">
-                            <strong>Stay date : </strong><span id="display_checkin"></span><strong> to </strong><span id="display_checkout"></span>
-                            <strong>Book Date : </strong><span id="display_bookdate"></span>
-                            <strong>By : </strong><span id="display_firstname"></span>
-                            <strong>Agency : </strong><span id="display_lastname"></span>
-                            <strong>Phone : </strong><span id="display_phone"></span><br>
-                            <strong>Room : </strong><span id="display_room"></span>
-                            <strong>Type : </strong><span id="display_type"></span>
-                            <strong>Building : </strong><span id="display_building"></span>
-                            <strong>Views : </strong><span id="display_views"></span>
-                        </div>
+                    <form id="form_add_checkinguest" method="POST">
+                        <div class="card">
+                            <div class="fixposition">
+                                <strong>Stay date : </strong><span id="display_checkin"></span><strong> to </strong><span id="display_checkout"></span>
+                                <strong>Book Date : </strong><span id="display_bookdate"></span>
+                                <strong>By : </strong><span id="display_firstname"></span>
+                                <strong>Agency : </strong><span id="display_lastname"></span>
+                                <strong>Phone : </strong><span id="display_phone"></span><br>
+                                <strong>Room : </strong><span id="display_room"></span>
+                                <strong>Type : </strong><span id="display_type"></span>
+                                <strong>Building : </strong><span id="display_building"></span>
+                                <strong>Views : </strong><span id="display_views"></span>
+                            </div>
 
-                        <form id="form_add_checkinguest" method="POST">
-                        <div class="card-head">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h3 class="mt-4 fixposition"> Add more guest in this room </h3>
-                                </div>
-                                <div class="col-md-2 mt-3">
-                                    <button  type="submit" data-toggle="modal" id="savecheckinguest" data-target="#exampleModal" class="btn btn-info btn-round ">Save</button>
-                                    <button type="submit" id="cancel_edit_infoguest" class="btn btn-info btn-round ">Cancel</button>
-                                    <input type="text" name="bl_id_add" id="bl_id_add" style="display:none;">
-
+                            
+                            <div class="card-head">
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <h3 class="mt-4 fixposition"> Add more guest in this room <span class="fname"></span> <span class="lname"></span></h3>
+                                    </div>
                                     <div class="col-md-2 mt-3">
+                                        <button type="submit" data-toggle="modal" id="savecheckinguest" data-target="#exampleModal" class="btn btn-primary btn-round ">Save</button>
+                                        <!-- Button trigger modal -->
                                         <!-- Modal -->
                                         <!-- ALERT ARE YOU SURE? -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -200,7 +199,8 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_yes">Save changes</button>
+                                                        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_yes_add_checkin">Save
+                                                            changes</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,93 +213,92 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <button type="submit" id="" class="btn btn-info btn-round ">Cancel</button>
+                                        <input type="text" name="bl_id_add" id="bl_id_add" style="display:none;">
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">First Name : </label>
+                                        <input type="text" class="form-control" name="display_firstname_checkinguest " id="display_firstname_checkinguest " />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Last Name : </label>
+                                        <input type="text" class="form-control" name="display_lastname_checkinguest " id="display_lastname_checkinguest " />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Phone : </label>
+                                        <input type="text" class="form-control" name="display_phone_checkinguest " id="display_phone_checkinguest " />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Passport ID : </label>
+                                        <input type="text" class="form-control" name="display_passport_checkinguest " id="display_passport_checkinguest "  />
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label for="">Birthday (YYYY-MM-DD) : </label>
+
+                                        <input type="date" class="form-control" id="bd_edit_infoguest" name="bd_edit_infoguest" />
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Nationality : </label>
+                                        <select class="custom-select form-control" name="display_nation_checkinguest" id="display_nation_checkinguest">
+                                            <option selected>N/A</option>
+                                            <option value="1">thai</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">E-mail : </label>
+                                        <input type="text" class="form-control" name="display_email_checkinguest " id="display_email_checkinguest " />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Sex : </label>
+                                        <select class="custom-select form-control" name="display_sex_checkinguest " id="display_sex_checkinguest ">
+                                            <option selected>N/A</option>
+                                            <option value="1">male</option>
+                                            <option value="2">female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="">Including Breakfast : </label>
+                                        <select class="custom-select form-control" name="display_incbreakfast_checkinguest " id="display_incbreakfast_checkinguest ">
+                                            <option selected>No</option>
+                                            <option value="1">0</option>
+                                            <option value="2">1</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Breakfast </label>
+                                        <select class="custom-select form-control" name="display_breakfast_checkinguest " id="display_breakfast_checkinguest ">
+                                            <option selected>N/A</option>
+                                            <option value="1">set 1</option>
+                                            <option value="2">set 2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="">Room Price : </label>
+                                        <input type="text" class="form-control" name="display_price_checkinguest " id="display_price_checkinguest " />
                                     </div>
                                 </div>
                             </div>
-                            <hr>
                         </div>
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">First Name : </label>
-                                    <input type="text" class="form-control" name="display_firstname_checkinguest " id="display_firstname_checkinguest " />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Last Name : </label>
-                                    <input type="text" class="form-control" name="display_lastname_checkinguest " id="display_lastname_checkinguest " />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Phone : </label>
-                                    <input type="text" class="form-control" name="display_phone_checkinguest " id="display_phone_checkinguest " />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Passport ID : </label>
-                                    <input type="text" class="form-control" name="display_passport_checkinguest " id="display_passport_checkinguest "  />
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">Birthday (YYYY-MM-DD) : </label>
-                                    <input type="date" class="form-control" name="display_HBD_checkinguest " id="display_HBD_checkinguest "
-                                    value=""
-                                    min="2020-01-01" max="2020-12-31">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Nationality : </label>
-                                    <select class="custom-select form-control" name="display_nation_checkinguest" id="display_nation_checkinguest">
-                                        <option selected>N/A</option>
-                                        <option value="1">thai</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">E-mail : </label>
-                                    <input type="text" class="form-control" name="display_email_checkinguest " id="display_email_checkinguest " />
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Sex : </label>
-                                    <select class="custom-select form-control" name="display_sex_checkinguest " id="display_sex_checkinguest ">
-                                        <option selected>N/A</option>
-                                        <option value="1">male</option>
-                                        <option value="2">female</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">Including Breakfast : </label>
-                                    <select class="custom-select form-control" name="display_incbreakfast_checkinguest " id="display_incbreakfast_checkinguest ">
-                                        <option selected>No</option>
-                                        <option value="1">0</option>
-                                        <option value="2">1</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Breakfast </label>
-                                    <select class="custom-select form-control" name="display_breakfast_checkinguest " id="display_breakfast_checkinguest ">
-                                        <option selected>N/A</option>
-                                        <option value="1">set 1</option>
-                                        <option value="2">set 2</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Room Price : </label>
-                                    <input type="text" class="form-control" name="display_price_checkinguest " id="display_price_checkinguest " />
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
-                <!-- end add infoguest check-in  -->
             </div>
-        </div>
+            <!-- end add infoguest check-in  -->
 
-
-
-        <footer class="footer">
+            <footer class="footer">
             <div class="container-fluid">
                 <nav>
                     <ul class="footer-menu">
@@ -325,7 +324,7 @@
                     </p>
                 </nav>
             </div>
-        </footer>
+            </footer>
         </div>
     </body>
 
@@ -340,24 +339,10 @@
     <script src="../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
     <script src="../assets/js/plugins/bootstrap-switch.js"></script>
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-    <!--  Chartist Plugin  -->
-    <script src="../assets/js/plugins/chartist.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
     <script src="../assets/js/light-bootstrap-dashboard.js?v=2.0.0 " type="text/javascript"></script>
     <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/js/demo.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            // Javascript method's body can be found in assets/js/demos.js
-            demo.initDashboardPageCharts();
-            demo.showNotification();
-        });
-    </script>
-    <!-- <script src="../application/load_hermes.js"></script> -->
     <script src="../application/add_infoguest.js"></script>
 
 </html>

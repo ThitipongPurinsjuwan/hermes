@@ -8,7 +8,7 @@ function ShowCheckin() {
   var query = window.location.search.substring(1);
   var vars = query.split("=");
   var ID = vars[1];
-  var url = "http://localhost/hermes/api.php/ShowCheckin/" + ID;
+  var url = "http://localhost/hermes/api.php/ShowCheckinGuest/" + ID;
   // input test
 
   // gard 12
@@ -45,17 +45,17 @@ function AddCheckinGuest() {
 
   $("#form_add_checkinguest").on("submit", function (e) {
     var parameter = $(this).serializeArray();
-    console.log(parameter);
+    // console.log(parameter);
     var url = "http://localhost/hermes/api.php/AddCheckinGuest";
-    $("#btn_yes").click(function (e) {
+    $("#btn_yes_add_checkin").click(function (e) {
+      console.log("parameter : " + parameter);
       $.post(url, parameter, function (response) {
-        // console.log(parameter);
+        console.log("res : " + JSON.stringify(response));
         if (response["message"] == "success") {
           // alerat succes
           $("#modal_alert").modal("show");
         }
       });
-      e.preventDefault();
     });
     e.preventDefault();
   });
